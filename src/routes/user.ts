@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
 
 const router = Router()
 
-router.get("/info", async (_req, res) => {
-res.status(200).send('hola');
-});
+router.get('/info', async (_req, res) => {
+  res.status(200).send('hola')
+})
 
 export default router

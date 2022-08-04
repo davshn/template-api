@@ -1,14 +1,10 @@
-import dotenv from 'dotenv'
-
 import server from './server'
+import db from './models'
 
-dotenv.config()
+const PORT = process.env.PORT ?? ''
 
-const { PORT } = process.env;
-
-//conection.sync({ force: false, logging: false }).then(() => {
+void db.conection.sync({ force: true, logging: false }).then(() => {
   server.listen(PORT, () => {
-    //Run server in PORT
-    console.log("%s listening at " + PORT)
-  });
-//});
+    console.log('%s listening at ' + PORT)
+  })
+})
