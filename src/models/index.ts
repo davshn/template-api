@@ -7,7 +7,7 @@ dotenv.config()
 
 const { DATABASE_URL } = process.env
 const basename = path.basename(__filename)
-const modelDefiners: any[] = []
+const modelDefiners: Function[] = []
 
 const config = {
   dialectOptions: {
@@ -31,13 +31,12 @@ fs.readdirSync(path.join(__dirname, './'))
     modelDefiners.push(require(path.join(__dirname, './', file)))
   })
 // Inject models to sequelize
-modelDefiners.forEach((model) => model(sequelize))
+modelDefiners.forEach((model: Function) => model(sequelize))
 const entries = Object.entries(sequelize.models)
 const capsEntries = entries.map((entry) => [
   entry[0][0].toUpperCase() + entry[0].slice(1),
   entry[1]
 ]);
-
 (sequelize.models as any) = Object.fromEntries(capsEntries)
-
+console.debug('🚀 ~ file: index.ts ~ line 40 ~ capsEntries', sequelize.models)
 export default { ...sequelize.models, conection: sequelize }
