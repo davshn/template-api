@@ -1,29 +1,19 @@
 import { Model, DataTypes } from 'sequelize'
-
-interface UserAttributes {
-  id: string
-  name: string
-  lastname: string
-  email: string
-  password: string
-  dateOfBirth: Date
-  createdAdoptions: number
-  deviceInfo: string
-  isBaned: boolean
-}
+import { UserAttributes } from '../types'
 
 module.exports = (sequelize: any) => {
-  class User extends Model<UserAttributes>
-    implements UserAttributes {
+  class User extends Model<UserAttributes> implements UserAttributes {
     id!: string
     name!: string
     lastname!: string
+    documentNumber!: string
+    documentType!: 'CC' | 'NI' | 'CE'
     email!: string
     password!: string
-    dateOfBirth!: Date
-    createdAdoptions!: number
+    givenInAdoption!: number
     deviceInfo!: string
     isBaned!: boolean
+    isVerified!: boolean
   }
   User.init({
     id: {
@@ -40,6 +30,15 @@ module.exports = (sequelize: any) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    documentNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    documentType: {
+      type: DataTypes.ENUM('CC', 'NI', 'CE'),
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       validate: { isEmail: true },
@@ -50,11 +49,7 @@ module.exports = (sequelize: any) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    dateOfBirth: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
-    },
-    createdAdoptions: {
+    givenInAdoption: {
       type: DataTypes.INTEGER,
       defaultValue: 0
     },
@@ -63,6 +58,10 @@ module.exports = (sequelize: any) => {
       allowNull: true
     },
     isBaned: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    isVerified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     }
