@@ -12,7 +12,7 @@ const swaggerDefinition = {
     },
     servers: [
         {
-            url: 'http://localhost:3000'
+            url: 'https://adoptapi.herokuapp.com'
         },
         {
             url: 'http://localhost:3000'
