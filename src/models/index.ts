@@ -20,7 +20,6 @@ const config = {
 
 const sequelize = new Sequelize(DATABASE_URL as string, config)
 
-// Reading all models from files
 fs.readdirSync(path.join(__dirname, './'))
   .filter(
     (file: string) =>
@@ -30,7 +29,7 @@ fs.readdirSync(path.join(__dirname, './'))
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     modelDefiners.push(require(path.join(__dirname, './', file)))
   })
-// Inject models to sequelize
+
 modelDefiners.forEach((model: Function) => model(sequelize))
 const entries = Object.entries(sequelize.models)
 const capsEntries = entries.map((entry) => [
@@ -38,5 +37,5 @@ const capsEntries = entries.map((entry) => [
   entry[1]
 ]);
 (sequelize.models as any) = Object.fromEntries(capsEntries)
-console.debug('🚀 ~ file: index.ts ~ line 40 ~ capsEntries', sequelize.models)
+
 export default { ...sequelize.models, conection: sequelize }
