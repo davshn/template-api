@@ -41,6 +41,7 @@ router.post('/register', versionProtection, validateRegister, async (req: Reques
     await registerController(req)
     res.status(201).send('Usuario registrado con exito')
   } catch (error) {
+    console.log(error)
     res.status(400).send('Usuario ya registrado')
   }
 })

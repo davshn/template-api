@@ -53,6 +53,7 @@ router.post('/register', verifyVersion_1.default, user_2.validateRegister, (req,
         res.status(201).send('Usuario registrado con exito');
     }
     catch (error) {
+        console.log(error);
         res.status(400).send('Usuario ya registrado');
     }
 }));
