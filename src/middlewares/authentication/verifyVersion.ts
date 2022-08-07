@@ -4,12 +4,9 @@ const versionProtection = (req: Request, res: Response, next: NextFunction): voi
   const { VERSION } = process.env
   const version = req.header('Version')
 
-  try {
-    if (version !== VERSION) res.status(426).send('La ultima version de la aplicacion es requerida')
-    else next()
-  } catch (err) {
+  if (version !== VERSION) {
     res.status(426).send('La ultima version de la aplicacion es requerida')
-  }
+  } else next()
 }
 
 export default versionProtection
