@@ -6,7 +6,7 @@ module.exports = (sequelize: Sequelize) => {
     id!: string
     name!: string
     lastname!: string
-    documentNumber!: number
+    documentNumber!: string
     documentType!: documentTypes
     email!: string
     password!: string
@@ -14,7 +14,7 @@ module.exports = (sequelize: Sequelize) => {
     deviceInfo!: string
     isBaned!: boolean
     isVerified!: boolean
-    phone!: number
+    phone!: string
   }
   User.init({
     id: {
@@ -47,7 +47,7 @@ module.exports = (sequelize: Sequelize) => {
       unique: true
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     },
     password: {

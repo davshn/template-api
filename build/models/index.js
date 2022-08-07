@@ -33,4 +33,4 @@ const capsEntries = entries.map((entry) => [
     entry[1]
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
-exports.default = Object.assign(Object.assign({}, sequelize.models), { conection: sequelize });
+exports.default = sequelize;

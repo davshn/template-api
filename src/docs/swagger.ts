@@ -33,7 +33,7 @@ const swaggerDefinition: OAS3Definition = {
             type: 'string'
           },
           documentNumber: {
-            type: 'integer'
+            type: 'string'
           },
           documentType: {
             type: 'string',
@@ -46,7 +46,7 @@ const swaggerDefinition: OAS3Definition = {
             type: 'string'
           },
           phone: {
-            type: 'integer'
+            type: 'string'
           }
         }
       }

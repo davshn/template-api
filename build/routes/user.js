@@ -12,40 +12,48 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/* eslint-disable @typescript-eslint/no-misused-promises */
 const express_1 = require("express");
-const user_1 = require("../middlewares/validations/user");
+const user_1 = require("../controllers/user");
+const user_2 = require("../middlewares/validations/user");
 const verifyVersion_1 = __importDefault(require("../middlewares/authentication/verifyVersion"));
 const router = (0, express_1.Router)();
-router.post('/register', verifyVersion_1.default, user_1.validateRegister, (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.status(201).send('hola');
+router.post('/register', verifyVersion_1.default, user_2.validateRegister, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    /**
+     * Post track
+     * @openapi
+     * /user/register:
+     *    post:
+     *      tags:
+     *        - User
+     *      summary: "User register"
+     *      description: Register a new user
+     *      parameters:
+     *       - in: header
+     *         name: Version
+     *         schema:
+     *         type: string
+     *         required: true
+     *      requestBody:
+     *          content:
+     *            application/json:
+     *              schema:
+     *                $ref: "#/components/schemas/newUser"
+     *      responses:
+     *        '201':
+     *          description: User Created.
+     *        '400':
+     *          description: Bad request.
+     *        '422':
+     *          description: Validation Error.
+     *        '426':
+     *          description: Upgrade Required.
+     */
+    try {
+        yield (0, user_1.registerController)(req);
+        res.status(201).send('Usuario registrado con exito');
+    }
+    catch (error) {
+        res.status(400).send('Usuario ya registrado');
+    }
 }));
 exports.default = router;
-/**
- * Post track
- * @openapi
- * /user/register:
- *    post:
- *      tags:
- *        - User
- *      summary: "User register"
- *      description: Register a new user
- *      parameters:
- *       - in: header
- *         name: Version
- *         schema:
- *         type: string
- *         required: true
- *      requestBody:
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/newUser"
- *      responses:
- *        '201':
- *          description: User Created.
- *        '422':
- *          description: Validation Error.
- *        '426':
- *          description: Upgrade Required.
- */

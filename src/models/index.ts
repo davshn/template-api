@@ -38,4 +38,4 @@ const capsEntries = entries.map((entry) => [
 ]);
 (sequelize.models as any) = Object.fromEntries(capsEntries)
 
-export default { ...sequelize.models, conection: sequelize }
+export default sequelize

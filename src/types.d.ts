@@ -2,10 +2,10 @@ export interface UserAttributes {
   id: string
   name: string
   lastname: string
-  documentNumber: number
+  documentNumber: string
   documentType: documentTypes
   email: string
-  phone: number
+  phone: string
   password: string
   givenInAdoption: number
   deviceInfo: string

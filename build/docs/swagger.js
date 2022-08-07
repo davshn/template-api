@@ -37,7 +37,7 @@ const swaggerDefinition = {
                         type: 'string'
                     },
                     documentNumber: {
-                        type: 'integer'
+                        type: 'string'
                     },
                     documentType: {
                         type: 'string',
@@ -50,7 +50,7 @@ const swaggerDefinition = {
                         type: 'string'
                     },
                     phone: {
-                        type: 'integer'
+                        type: 'string'
                     }
                 }
             }
