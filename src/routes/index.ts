@@ -4,9 +4,11 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerSetup from '../docs/swagger'
 import user from './user'
 
-const router = Router()
+const router = Router({ strict: true })
 
 router.use('/user', user)
-router.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSetup))
+
+// Documentation
+router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup))
 
 export default router
