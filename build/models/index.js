@@ -26,5 +26,7 @@ fs_1.default.readdirSync(path_1.default.join(__dirname, './'))
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     modelDefiners.push(require(path_1.default.join(__dirname, './', file)));
 });
+console.log(modelDefiners);
 modelDefiners.forEach((model) => model(sequelize));
+console.log(sequelize.models);
 exports.default = sequelize;

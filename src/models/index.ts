@@ -29,7 +29,7 @@ fs.readdirSync(path.join(__dirname, './'))
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     modelDefiners.push(require(path.join(__dirname, './', file)))
   })
-
+console.log(modelDefiners)
 modelDefiners.forEach((model: Function) => model(sequelize))
-
+console.log(sequelize.models)
 export default sequelize
