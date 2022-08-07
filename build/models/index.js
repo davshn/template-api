@@ -11,6 +11,7 @@ dotenv_1.default.config();
 const { DATABASE_URL } = process.env;
 const basename = path_1.default.basename(__filename);
 const modelDefiners = [];
+console.log(DATABASE_URL);
 const config = {
     dialectOptions: {
         ssl: {
