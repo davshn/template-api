@@ -22,7 +22,7 @@ const sequelize = new Sequelize(DATABASE_URL as string, config)
 
 fs.readdirSync(path.join(__dirname, './'))
   .filter((file: string) =>
-    file.indexOf('.') !== 0 && file !== basename && (file.slice(-3) === ('.ts') || file.slice(-3) === ('.js'))
+    file.indexOf('.') !== 0 && file !== basename && (file.slice(-3) === '.ts' || file.slice(-3) === '.js')
   )
   .forEach((file: string) => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires

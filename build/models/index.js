@@ -21,7 +21,7 @@ const config = {
 };
 const sequelize = new sequelize_1.Sequelize(DATABASE_URL, config);
 fs_1.default.readdirSync(path_1.default.join(__dirname, './'))
-    .filter((file) => file.indexOf('.') !== 0 && file !== basename && (file.slice(-3) === ('.ts') || file.slice(-3) === ('.js')))
+    .filter((file) => file.indexOf('.') !== 0 && file !== basename && (file.slice(-3) === '.ts' || file.slice(-3) === '.js'))
     .forEach((file) => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     modelDefiners.push(require(path_1.default.join(__dirname, './', file)));
