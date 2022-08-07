@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
 
+import { validateRegister } from '../middlewares/validations/user'
+import versionProtection from '../middlewares/authentication/verifyVersion'
+
 const router = Router()
 
-router.get('/info', async (_req, res) => {
-  res.status(200).send('hola')
+router.post('/register', versionProtection, validateRegister, async (_req: any, res: any) => {
+  res.status(201).send('hola')
 })
 
 export default router
@@ -17,14 +20,22 @@ export default router
  *        - User
  *      summary: "User register"
  *      description: Register a new user
+ *      parameters:
+ *       - in: header
+ *         name: Version
+ *         schema:
+ *         type: string
+ *         required: true
  *      requestBody:
  *          content:
  *            application/json:
  *              schema:
  *                $ref: "#/components/schemas/newUser"
  *      responses:
- *        '200':
- *          description: Retorna el objeto insertado en la coleccion.
+ *        '201':
+ *          description: User Created.
  *        '422':
- *          description: Error de validacion.
+ *          description: Validation Error.
+ *        '426':
+ *          description: Upgrade Required.
  */

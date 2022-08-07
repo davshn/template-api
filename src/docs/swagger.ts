@@ -24,7 +24,7 @@ const swaggerDefinition: OAS3Definition = {
     schemas: {
       newUser: {
         type: 'object',
-        required: ['name', 'lastname', 'documentNumber', 'documentType', 'email', 'phone'],
+        required: ['name', 'lastname', 'documentNumber', 'documentType', 'email', 'password', 'phone'],
         properties: {
           name: {
             type: 'string'
@@ -40,6 +40,9 @@ const swaggerDefinition: OAS3Definition = {
             enum: ['CC', 'NI', 'CE']
           },
           email: {
+            type: 'string'
+          },
+          password: {
             type: 'string'
           },
           phone: {
