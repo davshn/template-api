@@ -8,7 +8,7 @@ dotenv.config()
 const { DATABASE_URL } = process.env
 const basename = path.basename(__filename)
 const modelDefiners: Function[] = []
-console.log(DATABASE_URL)
+
 const config = {
   dialectOptions: {
     ssl: {
