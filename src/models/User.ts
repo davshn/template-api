@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize } from 'sequelize'
-import { UserAttributes, documentTypes } from '../types'
+import { UserAttributes, documentTypes } from '../types/types'
 
 module.exports = (sequelize: Sequelize) => {
   class User extends Model<UserAttributes> implements UserAttributes {
