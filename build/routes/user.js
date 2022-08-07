@@ -8,12 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable @typescript-eslint/no-misused-promises */
 const express_1 = require("express");
+const user_1 = require("../middlewares/validations/user");
+const verifyVersion_1 = __importDefault(require("../middlewares/authentication/verifyVersion"));
 const router = (0, express_1.Router)();
-router.get('/info', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.status(200).send('hola');
+router.post('/register', verifyVersion_1.default, user_1.validateRegister, (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.status(201).send('hola');
 }));
 exports.default = router;
 /**
@@ -25,14 +30,22 @@ exports.default = router;
  *        - User
  *      summary: "User register"
  *      description: Register a new user
+ *      parameters:
+ *       - in: header
+ *         name: Version
+ *         schema:
+ *         type: string
+ *         required: true
  *      requestBody:
  *          content:
  *            application/json:
  *              schema:
  *                $ref: "#/components/schemas/newUser"
  *      responses:
- *        '200':
- *          description: Retorna el objeto insertado en la coleccion.
+ *        '201':
+ *          description: User Created.
  *        '422':
- *          description: Error de validacion.
+ *          description: Validation Error.
+ *        '426':
+ *          description: Upgrade Required.
  */

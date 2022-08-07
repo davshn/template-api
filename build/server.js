@@ -11,6 +11,6 @@ const server = (0, express_1.default)();
 // Middlewares
 server.use(express_1.default.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express_1.default.json({ limit: '50mb' }));
-server.use('/', routes_1.default);
 server.use('/documentation', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.default));
+server.use('/', routes_1.default);
 exports.default = server;

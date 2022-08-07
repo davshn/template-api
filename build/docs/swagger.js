@@ -28,7 +28,7 @@ const swaggerDefinition = {
         schemas: {
             newUser: {
                 type: 'object',
-                required: ['name', 'lastname', 'documentNumber', 'documentType', 'email', 'phone'],
+                required: ['name', 'lastname', 'documentNumber', 'documentType', 'email', 'password', 'phone'],
                 properties: {
                     name: {
                         type: 'string'
@@ -44,6 +44,9 @@ const swaggerDefinition = {
                         enum: ['CC', 'NI', 'CE']
                     },
                     email: {
+                        type: 'string'
+                    },
+                    password: {
                         type: 'string'
                     },
                     phone: {
