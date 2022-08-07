@@ -17,8 +17,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const models_1 = __importDefault(require("../models"));
 const registerController = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const salt = yield bcrypt_1.default.genSalt(10);
-    console.log(models_1.default.models);
-    yield models_1.default.models.User.create({
+    yield models_1.default.User.create({
         name: req.body.name,
         lastname: req.body.lastname,
         documentNumber: req.body.documentNumber,

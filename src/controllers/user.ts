@@ -5,8 +5,8 @@ import db from '../models'
 
 export const registerController = async (req: Request): Promise<any> => {
   const salt = await bcrypt.genSalt(10)
-  console.log(db.models)
-  await db.models.User.create({
+
+  await db.User.create({
     name: req.body.name,
     lastname: req.body.lastname,
     documentNumber: req.body.documentNumber,
