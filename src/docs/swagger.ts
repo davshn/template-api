@@ -49,6 +49,21 @@ const swaggerDefinition: OAS3Definition = {
             type: 'string'
           }
         }
+      },
+      userLogin: {
+        type: 'object',
+        required: ['email', 'password', 'deviceInfo'],
+        properties: {
+          email: {
+            type: 'string'
+          },
+          password: {
+            type: 'string'
+          },
+          deviceInfo: {
+            type: 'string'
+          }
+        }
       }
     }
   }

@@ -53,6 +53,21 @@ const swaggerDefinition = {
                         type: 'string'
                     }
                 }
+            },
+            userLogin: {
+                type: 'object',
+                required: ['email', 'password', 'deviceInfo'],
+                properties: {
+                    email: {
+                        type: 'string'
+                    },
+                    password: {
+                        type: 'string'
+                    },
+                    deviceInfo: {
+                        type: 'string'
+                    }
+                }
             }
         }
     }

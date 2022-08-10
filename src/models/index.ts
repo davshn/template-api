@@ -30,4 +30,7 @@ fs.readdirSync(path.join(__dirname, './'))
   })
 
 modelDefiners.forEach((model: Function) => model(sequelize))
+
+export const models = sequelize.models
+
 export default sequelize

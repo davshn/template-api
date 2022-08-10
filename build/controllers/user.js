@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerController = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const models_1 = __importDefault(require("../models"));
+const models_1 = require("../models");
 const registerController = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const salt = yield bcrypt_1.default.genSalt(10);
-    yield models_1.default.models.User.create({
+    yield models_1.models.User.create({
         name: req.body.name,
         lastname: req.body.lastname,
         documentNumber: req.body.documentNumber,

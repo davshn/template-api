@@ -1,3 +1,5 @@
+import { Request } from 'express'
+
 export interface UserAttributes {
   id: string
   name: string
@@ -17,4 +19,12 @@ export enum documentTypes {
   CC = 'CC',
   NI = 'NI',
   CE = 'CE'
+}
+
+export interface DecodedRequest extends Request{
+  user: any
+}
+
+export interface userToken{
+  token: string
 }

@@ -1,9 +1,9 @@
 import server from './server'
-import db from './models'
+import sequelize from './models'
 
 const PORT = process.env.PORT ?? ''
 
-void db.sync({ force: true, logging: false }).then(() => {
+void sequelize.sync({ force: true, logging: false }).then(() => {
   server.listen(PORT, () => {
     console.log('%s listening at ' + PORT)
   })

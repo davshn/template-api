@@ -31,6 +31,10 @@ exports.validateRegister = [
     (0, express_validator_1.body)('phone', 'Telefono incorrecto')
         .exists()
         .isInt(),
+    (0, express_validator_1.header)('Version', 'La version de la aplicacion es requerida')
+        .exists()
+        .isString()
+        .isLength({ min: 5 }),
     (req, res, next) => {
         (0, validateResults_1.default)(req, res, next);
     }

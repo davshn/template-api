@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.models = void 0;
 const sequelize_1 = require("sequelize");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
@@ -27,4 +28,5 @@ fs_1.default.readdirSync(path_1.default.join(__dirname, './'))
     modelDefiners.push(require(path_1.default.join(__dirname, './', file)));
 });
 modelDefiners.forEach((model) => model(sequelize));
+exports.models = sequelize.models;
 exports.default = sequelize;
