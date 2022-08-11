@@ -12,11 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginController = void 0;
+exports.loginController = exports.registerController = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const models_1 = require("../models");
 const { TOKEN_KEY } = process.env;
+const registerController = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const salt = yield bcrypt_1.default.genSalt(10);
+    yield models_1.models.User.create({
+        name: req.body.name,
+        lastname: req.body.lastname,
+        documentNumber: req.body.documentNumber,
+        documentType: req.body.documentType,
+        email: req.body.email.toLowerCase(),
+        password: yield bcrypt_1.default.hash(req.body.password, salt),
+        phone: req.body.phone
+    });
+});
+exports.registerController = registerController;
 const loginController = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const email = req.body.email.toLowerCase();
     const password = req.body.password;

@@ -17,6 +17,46 @@ const verifyVersion_1 = __importDefault(require("../middlewares/authentication/v
 const authentication_1 = require("../middlewares/validations/authentication");
 const authentication_2 = require("../controllers/authentication");
 const router = (0, express_1.Router)();
+router.post('/register', verifyVersion_1.default, authentication_1.validateRegister, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    /**
+     * Post track
+     * @openapi
+     * /authentication/register:
+     *    post:
+     *      tags:
+     *        - Authentication
+     *      summary: "User register"
+     *      description: Register a new user
+     *      parameters:
+     *       - in: header
+     *         name: Version
+     *         schema:
+     *         type: string
+     *         required: true
+     *      requestBody:
+     *          content:
+     *            application/json:
+     *              schema:
+     *                $ref: "#/components/schemas/newUser"
+     *      responses:
+     *        '201':
+     *          description: User Created.
+     *        '400':
+     *          description: Bad request.
+     *        '422':
+     *          description: Validation Error.
+     *        '426':
+     *          description: Upgrade Required.
+     */
+    try {
+        yield (0, authentication_2.registerController)(req);
+        res.status(201).send('Usuario registrado con exito');
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).send('Usuario ya registrado');
+    }
+}));
 router.post('/login', verifyVersion_1.default, authentication_1.validateLogin, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
      * Post track

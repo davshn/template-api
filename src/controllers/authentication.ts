@@ -7,6 +7,20 @@ import { userToken } from '../types/types'
 
 const { TOKEN_KEY } = process.env
 
+export const registerController = async (req: Request): Promise<any> => {
+  const salt = await bcrypt.genSalt(10)
+
+  await models.User.create({
+    name: req.body.name,
+    lastname: req.body.lastname,
+    documentNumber: req.body.documentNumber,
+    documentType: req.body.documentType,
+    email: req.body.email.toLowerCase(),
+    password: await bcrypt.hash(req.body.password, salt),
+    phone: req.body.phone
+  })
+}
+
 export const loginController = async (req: Request): Promise<userToken> => {
   const email = req.body.email.toLowerCase()
   const password = req.body.password
