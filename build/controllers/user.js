@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerController = void 0;
+exports.infoController = exports.registerController = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const models_1 = require("../models");
 const registerController = (req) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,3 +28,20 @@ const registerController = (req) => __awaiter(void 0, void 0, void 0, function* 
     });
 });
 exports.registerController = registerController;
+const infoController = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = req.user;
+    const userInfo = yield models_1.models.User.findOne({
+        attributes: [
+            'name',
+            'lastname',
+            'email',
+            'documentType',
+            'documentNumber',
+            'phone',
+            'givenInAdoption'
+        ],
+        where: { id: user.id }
+    });
+    return userInfo;
+});
+exports.infoController = infoController;

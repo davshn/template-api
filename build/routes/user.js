@@ -16,6 +16,7 @@ const express_1 = require("express");
 const user_1 = require("../controllers/user");
 const user_2 = require("../middlewares/validations/user");
 const verifyVersion_1 = __importDefault(require("../middlewares/authentication/verifyVersion"));
+const verifyAuthentication_1 = __importDefault(require("../middlewares/authentication/verifyAuthentication"));
 const router = (0, express_1.Router)();
 router.post('/register', verifyVersion_1.default, user_2.validateRegister, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
@@ -55,6 +56,34 @@ router.post('/register', verifyVersion_1.default, user_2.validateRegister, (req,
     catch (error) {
         console.log(error);
         res.status(400).send('Usuario ya registrado');
+    }
+}));
+router.get('/info', verifyAuthentication_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    /**
+   * Post track
+   * @openapi
+   * /user/info:
+   *    get:
+   *      tags:
+   *        - User
+   *      summary: "User information"
+   *      description: Get user information
+   *      security:
+   *        - bearerAuth: []
+   *      responses:
+   *        '200':
+   *          description: User information success.
+   *        '400':
+   *          description: Bad request.
+   *        '401':
+   *          description: Invalid user.
+   */
+    try {
+        const user = yield (0, user_1.infoController)(req);
+        res.status(200).json(user);
+    }
+    catch (error) {
+        res.status(400).send('Error al obtener datos de usuario');
     }
 }));
 exports.default = router;
