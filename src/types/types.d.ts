@@ -16,7 +16,7 @@ export interface UserAttributes {
   password: string
   givenInAdoption: number
   deviceInfo: string
-  isBaned: boolean
+  isBanned: boolean
   isVerified: boolean
 }
 

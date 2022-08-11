@@ -50,7 +50,7 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.STRING,
             allowNull: true
         },
-        isBaned: {
+        isBanned: {
             type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: false
         },

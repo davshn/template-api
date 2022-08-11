@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const verifyVersion_1 = __importDefault(require("../middlewares/authentication/verifyVersion"));
 const authentication_1 = require("../middlewares/validations/authentication");
-const authenticatiion_1 = require("../controllers/authenticatiion");
+const authentication_2 = require("../controllers/authentication");
 const router = (0, express_1.Router)();
 router.post('/login', verifyVersion_1.default, authentication_1.validateLogin, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
@@ -49,7 +49,7 @@ router.post('/login', verifyVersion_1.default, authentication_1.validateLogin, (
      *          description: Upgrade Required.
      */
     try {
-        const loggedUser = yield (0, authenticatiion_1.loginController)(req);
+        const loggedUser = yield (0, authentication_2.loginController)(req);
         res.status(200).json(loggedUser);
     }
     catch (error) {

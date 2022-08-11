@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express'
 
 import versionProtection from '../middlewares/authentication/verifyVersion'
 import { validateLogin } from '../middlewares/validations/authentication'
-import { loginController } from '../controllers/authenticatiion'
+import { loginController } from '../controllers/authentication'
 
 const router = Router()
 

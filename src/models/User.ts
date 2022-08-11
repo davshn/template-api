@@ -12,7 +12,7 @@ module.exports = (sequelize: Sequelize) => {
     password!: string
     givenInAdoption!: number
     deviceInfo!: string
-    isBaned!: boolean
+    isBanned!: boolean
     isVerified!: boolean
     phone!: string
   }
@@ -62,7 +62,7 @@ module.exports = (sequelize: Sequelize) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    isBaned: {
+    isBanned: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
