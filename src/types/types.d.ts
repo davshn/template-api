@@ -1,5 +1,10 @@
-import { Request } from 'express'
-
+declare global {
+  namespace Express {
+    interface Request {
+      user?: decodedToken
+    }
+  }
+}
 export interface UserAttributes {
   id: string
   name: string
@@ -21,10 +26,12 @@ export enum documentTypes {
   CE = 'CE'
 }
 
-export interface DecodedRequest extends Request{
-  user: any
+export interface userToken {
+  token: string
 }
 
-export interface userToken{
-  token: string
+export interface decodedToken{
+  id: string
+  email: string
+  deviceInfo: string
 }

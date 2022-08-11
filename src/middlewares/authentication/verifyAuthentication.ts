@@ -1,22 +1,22 @@
 import jwt from 'jsonwebtoken'
-import { Response, NextFunction } from 'express'
-import { DecodedRequest } from '../../types/types'
+import { Response, NextFunction, Request } from 'express'
+import { decodedToken } from '../../types/types'
 
 const { TOKEN_KEY } = process.env
 
-const authenticateProtection = (req: DecodedRequest, res: Response, next: NextFunction): void => {
-  const token = req.header('Autentication')
+const verifyAuthentication = (req: Request, res: Response, next: NextFunction): void => {
+  const token = req.header('Authorization')?.slice(7)
 
-  if (token === null) {
-    res.status(401).send('Se requiere ser un usuario autenticado')
-  }
   try {
+    if (token === null) {
+      res.status(401).send('Se requiere ser un usuario autenticado')
+    }
     const decoded = jwt.verify(token as string, TOKEN_KEY as string)
-    req.user = decoded
+    req.user = decoded as decodedToken
     next()
   } catch (err) {
-    res.status(401).send('Usuario invalido')
+    res.status(401).send('Usuario no valido')
   }
 }
 
-export default authenticateProtection
+export default verifyAuthentication

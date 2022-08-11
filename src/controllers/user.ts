@@ -1,5 +1,6 @@
 import { Request } from 'express'
 import bcrypt from 'bcrypt'
+import { decodedToken } from '../types/types'
 
 import { models } from '../models'
 
@@ -15,4 +16,22 @@ export const registerController = async (req: Request): Promise<any> => {
     password: await bcrypt.hash(req.body.password, salt),
     phone: req.body.phone
   })
+}
+
+export const infoController = async (req: Request): Promise<any> => {
+  const user = req.user as decodedToken
+
+  const userInfo = await models.User.findOne({
+    attributes: [
+      'name',
+      'lastname',
+      'email',
+      'documentType',
+      'documentNumber',
+      'phone',
+      'givenInAdoption'
+    ],
+    where: { id: user.id }
+  })
+  return userInfo
 }
