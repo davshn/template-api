@@ -6,7 +6,6 @@ const { TOKEN_KEY } = process.env
 
 const verifyAuthentication = (req: Request, res: Response, next: NextFunction): void => {
   const token = req.header('Authorization')?.slice(7)
-
   try {
     if (token === null) {
       res.status(401).send('Se requiere ser un usuario autenticado')

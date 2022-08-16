@@ -16,6 +16,7 @@ export interface UserAttributes {
   password: string
   givenInAdoption: number
   deviceInfo: string
+  role: userRoles
   isBanned: boolean
   isVerified: boolean
 }
@@ -34,4 +35,10 @@ export interface decodedToken{
   id: string
   email: string
   deviceInfo: string
+}
+
+export enum userRoles {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+  ROOT = 'ROOT'
 }

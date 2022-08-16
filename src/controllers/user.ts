@@ -5,7 +5,6 @@ import { models } from '../models'
 
 export const infoController = async (req: Request): Promise<any> => {
   const user = req.user as decodedToken
-
   const userInfo = await models.User.findOne({
     attributes: [
       'name',
@@ -14,7 +13,8 @@ export const infoController = async (req: Request): Promise<any> => {
       'documentType',
       'documentNumber',
       'phone',
-      'givenInAdoption'
+      'givenInAdoption',
+      'role'
     ],
     where: { id: user.id }
   })

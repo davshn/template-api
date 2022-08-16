@@ -1,11 +1,10 @@
 import { Router, Request, Response } from 'express'
 
-import versionProtection from '../middlewares/authentication/verifyVersion'
 import { validateLogin, validateRegister } from '../middlewares/validations/authentication'
 import { loginController, registerController } from '../controllers/authentication'
 
 const router = Router()
-router.post('/register', versionProtection, validateRegister, async (req: Request, res: Response) => {
+router.post('/register', validateRegister, async (req: Request, res: Response) => {
   /**
    * Post track
    * @openapi
@@ -45,7 +44,7 @@ router.post('/register', versionProtection, validateRegister, async (req: Reques
   }
 })
 
-router.post('/login', versionProtection, validateLogin, async (req: Request, res: Response) => {
+router.post('/login', validateLogin, async (req: Request, res: Response) => {
 /**
  * Post track
  * @openapi
@@ -80,6 +79,7 @@ router.post('/login', versionProtection, validateLogin, async (req: Request, res
     const loggedUser = await loginController(req)
     res.status(200).json(loggedUser)
   } catch (error: any) {
+    console.log(error)
     res.status(400).json(error.message)
   }
 })

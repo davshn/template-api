@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize } from 'sequelize'
-import { UserAttributes, documentTypes } from '../types/types'
+import { UserAttributes, documentTypes, userRoles } from '../types/types'
 
 module.exports = (sequelize: Sequelize) => {
   class User extends Model<UserAttributes> implements UserAttributes {
@@ -9,12 +9,13 @@ module.exports = (sequelize: Sequelize) => {
     documentNumber!: string
     documentType!: documentTypes
     email!: string
+    phone!: string
     password!: string
     givenInAdoption!: number
     deviceInfo!: string
+    role!: userRoles
     isBanned!: boolean
     isVerified!: boolean
-    phone!: string
   }
   User.init({
     id: {
@@ -61,6 +62,11 @@ module.exports = (sequelize: Sequelize) => {
     deviceInfo: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    role: {
+      type: DataTypes.ENUM('USER', 'ADMIN', 'ROOT'),
+      defaultValue: 'USER',
+      allowNull: false
     },
     isBanned: {
       type: DataTypes.BOOLEAN,

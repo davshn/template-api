@@ -15,14 +15,14 @@ export const registerController = async (req: Request): Promise<any> => {
     lastname: req.body.lastname,
     documentNumber: req.body.documentNumber,
     documentType: req.body.documentType,
-    email: req.body.email.toLowerCase(),
+    email: req.body.email,
     password: await bcrypt.hash(req.body.password, salt),
     phone: req.body.phone
   })
 }
 
 export const loginController = async (req: Request): Promise<userToken> => {
-  const email = req.body.email.toLowerCase()
+  const email = req.body.email
   const password = req.body.password
   const deviceInfo = req.body.deviceInfo
 

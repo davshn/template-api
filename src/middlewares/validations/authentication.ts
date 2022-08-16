@@ -4,55 +4,67 @@ import { Request, Response, NextFunction } from 'express'
 import validateResults from './validateResults'
 
 export const validateLogin = [
-  body('email', 'Se requiere un email valido')
+  body('email', 'Email no valido')
     .exists()
-    .isEmail(),
+    .isEmail()
+    .normalizeEmail(),
   body('password', 'Contraseña no valida')
     .exists()
     .isString()
-    .isStrongPassword(),
+    .isStrongPassword()
+    .escape(),
   body('deviceInfo', 'La informacion del dispositivo es requerida')
     .exists()
     .isString()
-    .isLength({ min: 5 }),
+    .isLength({ min: 5 })
+    .escape(),
   header('Version', 'La version de la aplicacion es requerida')
     .exists()
     .isString()
-    .isLength({ min: 5 }),
+    .isLength({ min: 5 })
+    .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
   }
 ]
 
 export const validateRegister = [
-  body('name', 'Nombre incorrecto')
+  body('name', 'Nombre no valido')
     .exists()
     .isString()
-    .isLength({ min: 3, max: 12 }),
-  body('lastname', 'Apellido incorrecto')
+    .isLength({ min: 3, max: 12 })
+    .trim()
+    .escape(),
+  body('lastname', 'Apellido no valido')
     .exists()
     .isString()
-    .isLength({ min: 3, max: 12 }),
-  body('documentNumber', 'Numero de documento incorrecto')
+    .isLength({ min: 3, max: 12 })
+    .trim()
+    .escape(),
+  body('documentNumber', 'Numero de documento no valido')
     .exists()
-    .isInt(),
-  body('documentType', 'Tipo de documento incorrecto')
+    .isInt()
+    .toInt(),
+  body('documentType', 'Tipo de documento no valido')
     .exists()
     .isIn(['CC', 'NI', 'CE']),
   body('email', 'Email incorrecto')
     .exists()
-    .isEmail(),
-  body('password', 'Contraseña incorrecta')
+    .isEmail()
+    .normalizeEmail(),
+  body('password', 'Contraseña no valida')
     .exists()
     .isString()
-    .isStrongPassword(),
-  body('phone', 'Telefono incorrecto')
+    .isStrongPassword()
+    .escape(),
+  body('phone', 'Telefono no valido')
     .exists()
     .isInt(),
   header('Version', 'La version de la aplicacion es requerida')
     .exists()
     .isString()
-    .isLength({ min: 5 }),
+    .isLength({ min: 5 })
+    .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
   }

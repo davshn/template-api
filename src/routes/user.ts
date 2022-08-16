@@ -1,11 +1,11 @@
 import { Router, Request, Response } from 'express'
 
 import { infoController } from '../controllers/user'
-import verifyAuthentication from '../middlewares/authentication/verifyAuthentication'
 
 const router = Router()
 
-router.get('/info', verifyAuthentication, async (req: Request, res: Response) => {
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+router.get('/info', async (req: Request, res: Response) => {
   /**
  * Post track
  * @openapi
