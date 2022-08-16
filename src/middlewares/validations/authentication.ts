@@ -3,6 +3,28 @@ import { Request, Response, NextFunction } from 'express'
 
 import validateResults from './validateResults'
 
+export const validateVersion = [
+  header('Version', 'La version de la aplicacion es requerida')
+    .exists()
+    .isString()
+    .isLength({ min: 5 })
+    .escape(),
+  (req: Request, res: Response, next: NextFunction) => {
+    validateResults(req, res, next)
+  }
+]
+
+export const validateToken = [
+  header('Authorization', 'Token no valido')
+    .exists()
+    .isString()
+    .isLength({ min: 10 })
+    .escape(),
+  (req: Request, res: Response, next: NextFunction) => {
+    validateResults(req, res, next)
+  }
+]
+
 export const validateLogin = [
   body('email', 'Email no valido')
     .exists()
@@ -14,11 +36,6 @@ export const validateLogin = [
     .isStrongPassword()
     .escape(),
   body('deviceInfo', 'La informacion del dispositivo es requerida')
-    .exists()
-    .isString()
-    .isLength({ min: 5 })
-    .escape(),
-  header('Version', 'La version de la aplicacion es requerida')
     .exists()
     .isString()
     .isLength({ min: 5 })
@@ -60,11 +77,6 @@ export const validateRegister = [
   body('phone', 'Telefono no valido')
     .exists()
     .isInt(),
-  header('Version', 'La version de la aplicacion es requerida')
-    .exists()
-    .isString()
-    .isLength({ min: 5 })
-    .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
   }

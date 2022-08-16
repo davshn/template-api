@@ -6,11 +6,12 @@ import user from './user'
 import authentication from './authentication'
 import versionProtection from '../middlewares/authentication/verifyVersion'
 import verifyAuthentication from '../middlewares/authentication/verifyAuthentication'
+import { validateVersion, validateToken } from '../middlewares/validations/authentication'
 
 const router = Router({ strict: true })
 
-router.use('/user', verifyAuthentication, user)
-router.use('/authentication', versionProtection, authentication)
+router.use('/user', validateToken, verifyAuthentication, user)
+router.use('/authentication', validateVersion, versionProtection, authentication)
 // Documentation
 router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup))
 
