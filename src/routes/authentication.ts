@@ -3,6 +3,7 @@ import { Router, Request, Response } from 'express'
 import { validateLogin, validateRegister } from '../middlewares/validations/authentication'
 import { loginController, registerController } from '../controllers/authentication'
 import { bruteLimiter } from '../middlewares/rateLimiter'
+import Logger from '../middlewares/logger/winston'
 
 const router = Router()
 router.post('/register', validateRegister, async (req: Request, res: Response) => {
@@ -40,7 +41,7 @@ router.post('/register', validateRegister, async (req: Request, res: Response) =
     await registerController(req)
     res.status(201).send('Usuario registrado con exito')
   } catch (error) {
-    console.log(error)
+    Logger.error(error)
     res.status(400).send('Usuario ya registrado')
   }
 })

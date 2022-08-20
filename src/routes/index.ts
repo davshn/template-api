@@ -13,6 +13,7 @@ const router = Router({ strict: true })
 router.use('/user', validateToken, verifyAuthentication, user)
 router.use('/authentication', validateVersion, versionProtection, authentication)
 // Documentation
+
 router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup))
 
 export default router

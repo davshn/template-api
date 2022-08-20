@@ -8,11 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const authentication_1 = require("../middlewares/validations/authentication");
 const authentication_2 = require("../controllers/authentication");
 const rateLimiter_1 = require("../middlewares/rateLimiter");
+const winston_1 = __importDefault(require("../middlewares/logger/winston"));
 const router = (0, express_1.Router)();
 router.post('/register', authentication_1.validateRegister, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
@@ -50,7 +54,7 @@ router.post('/register', authentication_1.validateRegister, (req, res) => __awai
         res.status(201).send('Usuario registrado con exito');
     }
     catch (error) {
-        console.log(error);
+        winston_1.default.error(error);
         res.status(400).send('Usuario ya registrado');
     }
 }));
