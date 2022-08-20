@@ -8,15 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const user_1 = require("../controllers/user");
-const verifyAuthentication_1 = __importDefault(require("../middlewares/authentication/verifyAuthentication"));
 const router = (0, express_1.Router)();
-router.get('/info', verifyAuthentication_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+router.get('/info', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
    * Post track
    * @openapi
@@ -35,6 +32,8 @@ router.get('/info', verifyAuthentication_1.default, (req, res) => __awaiter(void
    *          description: Bad request.
    *        '401':
    *          description: Invalid user.
+   *        '422':
+   *          description: Validation Error.
    */
     try {
         const user = yield (0, user_1.infoController)(req);

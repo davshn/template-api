@@ -1,10 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const corsConfig = (_req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE');
-    next();
+const whitelist = ['https://adoptapi.herokuapp.com'];
+const corsConfig = {
+    origin: function (origin, callback) {
+        if (whitelist.includes(origin) || origin === undefined) {
+            callback(null, true);
+        }
+        else {
+            // eslint-disable-next-line node/no-callback-literal
+            callback('No permitido por CORS');
+        }
+    }
 };
 exports.default = corsConfig;

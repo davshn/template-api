@@ -50,6 +50,11 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.STRING,
             allowNull: true
         },
+        role: {
+            type: sequelize_1.DataTypes.ENUM('USER', 'ADMIN', 'ROOT'),
+            defaultValue: 'USER',
+            allowNull: false
+        },
         isBanned: {
             type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: false

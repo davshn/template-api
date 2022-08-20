@@ -9,9 +9,6 @@ const verifyAuthentication = (req, res, next) => {
     var _a;
     const token = (_a = req.header('Authorization')) === null || _a === void 0 ? void 0 : _a.slice(7);
     try {
-        if (token === null) {
-            res.status(401).send('Se requiere ser un usuario autenticado');
-        }
         const decoded = jsonwebtoken_1.default.verify(token, TOKEN_KEY);
         req.user = decoded;
         next();

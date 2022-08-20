@@ -24,14 +24,14 @@ const registerController = (req) => __awaiter(void 0, void 0, void 0, function* 
         lastname: req.body.lastname,
         documentNumber: req.body.documentNumber,
         documentType: req.body.documentType,
-        email: req.body.email.toLowerCase(),
+        email: req.body.email,
         password: yield bcrypt_1.default.hash(req.body.password, salt),
         phone: req.body.phone
     });
 });
 exports.registerController = registerController;
 const loginController = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const email = req.body.email.toLowerCase();
+    const email = req.body.email;
     const password = req.body.password;
     const deviceInfo = req.body.deviceInfo;
     const user = yield models_1.models.User.findOne({ where: { email } });

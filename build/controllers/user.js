@@ -21,7 +21,8 @@ const infoController = (req) => __awaiter(void 0, void 0, void 0, function* () {
             'documentType',
             'documentNumber',
             'phone',
-            'givenInAdoption'
+            'givenInAdoption',
+            'role'
         ],
         where: { id: user.id }
     });
