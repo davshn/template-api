@@ -24,6 +24,8 @@ router.get('/info', async (req: Request, res: Response) => {
  *          description: Bad request.
  *        '401':
  *          description: Invalid user.
+ *        '422':
+ *          description: Validation Error.
  */
   try {
     const user = await infoController(req)
