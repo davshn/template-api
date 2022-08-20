@@ -4,6 +4,7 @@ const whitelist: string[] = ['https://adoptapi.herokuapp.com']
 
 const corsConfig = {
   origin: function (origin: string, callback: Function) {
+    console.log(origin)
     if (whitelist.includes(origin) || origin === undefined) {
       callback(null, true)
     } else {

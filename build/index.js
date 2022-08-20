@@ -12,3 +12,4 @@ void models_1.default.sync({ force: false, logging: false }).then(() => {
         console.log('%s listening at ' + PORT);
     });
 });
+// heroku logs --tail -a adoptapi
