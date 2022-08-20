@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const authentication_1 = require("../middlewares/validations/authentication");
 const authentication_2 = require("../controllers/authentication");
+const rateLimiter_1 = require("../middlewares/rateLimiter");
 const router = (0, express_1.Router)();
 router.post('/register', authentication_1.validateRegister, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
@@ -53,7 +54,7 @@ router.post('/register', authentication_1.validateRegister, (req, res) => __awai
         res.status(400).send('Usuario ya registrado');
     }
 }));
-router.post('/login', authentication_1.validateLogin, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/login', rateLimiter_1.bruteLimiter, authentication_1.validateLogin, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
      * Post track
      * @openapi

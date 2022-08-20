@@ -13,11 +13,11 @@ const express_1 = require("express");
 const user_1 = require("../controllers/user");
 const router = (0, express_1.Router)();
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-router.get('/info', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
    * Post track
    * @openapi
-   * /user/info:
+   * /user/:
    *    get:
    *      tags:
    *        - User

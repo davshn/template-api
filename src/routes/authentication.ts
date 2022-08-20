@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express'
 
 import { validateLogin, validateRegister } from '../middlewares/validations/authentication'
 import { loginController, registerController } from '../controllers/authentication'
+import { bruteLimiter } from '../middlewares/rateLimiter'
 
 const router = Router()
 router.post('/register', validateRegister, async (req: Request, res: Response) => {
@@ -44,7 +45,7 @@ router.post('/register', validateRegister, async (req: Request, res: Response) =
   }
 })
 
-router.post('/login', validateLogin, async (req: Request, res: Response) => {
+router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Response) => {
 /**
  * Post track
  * @openapi

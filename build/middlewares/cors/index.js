@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const whitelist = ['https://adoptapi.herokuapp.com'];
 const corsConfig = {
     origin: function (origin, callback) {
-        console.log(origin);
         if (whitelist.includes(origin) || origin === undefined) {
             callback(null, true);
         }

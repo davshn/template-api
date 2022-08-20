@@ -5,11 +5,11 @@ import { infoController } from '../controllers/user'
 const router = Router()
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-router.get('/info', async (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   /**
  * Post track
  * @openapi
- * /user/info:
+ * /user/:
  *    get:
  *      tags:
  *        - User
