@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const user_1 = require("../controllers/user");
+const winston_1 = __importDefault(require("../config/logger/winston"));
 const router = (0, express_1.Router)();
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,19 +31,20 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
    *        - bearerAuth: []
    *      responses:
    *        '200':
-   *          description: User information success.
+   *          $ref: "#/components/responses/200"
    *        '400':
-   *          description: Bad request.
+   *          $ref: "#/components/responses/400"
    *        '401':
-   *          description: Invalid user.
+   *          $ref: "#/components/responses/401"
    *        '422':
-   *          description: Validation Error.
+   *          $ref: "#/components/responses/422"
    */
     try {
         const user = yield (0, user_1.infoController)(req);
         res.status(200).json(user);
     }
     catch (error) {
+        winston_1.default.error(error);
         res.status(400).send('Error al obtener datos de usuario');
     }
 }));

@@ -7,9 +7,9 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const errors_1 = require("./middlewares/errors");
-const rateLimiter_1 = require("./middlewares/rateLimiter");
-const cors_2 = __importDefault(require("./middlewares/cors"));
-const morgan_1 = __importDefault(require("./middlewares/logger/morgan"));
+const rateLimiter_1 = require("./config/rateLimiter");
+const cors_2 = __importDefault(require("./config/cors"));
+const morgan_1 = __importDefault(require("./config/logger/morgan"));
 const routes_1 = __importDefault(require("./routes"));
 const server = (0, express_1.default)();
 // Middlewares

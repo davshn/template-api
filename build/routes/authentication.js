@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const authentication_1 = require("../middlewares/validations/authentication");
 const authentication_2 = require("../controllers/authentication");
-const rateLimiter_1 = require("../middlewares/rateLimiter");
-const winston_1 = __importDefault(require("../middlewares/logger/winston"));
+const rateLimiter_1 = require("../config/rateLimiter");
+const winston_1 = __importDefault(require("../config/logger/winston"));
 const router = (0, express_1.Router)();
 router.post('/register', authentication_1.validateRegister, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /**
@@ -41,11 +41,11 @@ router.post('/register', authentication_1.validateRegister, (req, res) => __awai
      *                $ref: "#/components/schemas/newUser"
      *      responses:
      *        '201':
-     *          description: User Created.
+     *          $ref: "#/components/responses/200"
      *        '400':
-     *          description: Bad request.
+     *          $ref: "#/components/responses/400"
      *        '422':
-     *          description: Validation Error.
+     *          $ref: "#/components/responses/422"
      *        '426':
      *          description: Upgrade Required.
      */
@@ -81,11 +81,11 @@ router.post('/login', rateLimiter_1.bruteLimiter, authentication_1.validateLogin
      *                $ref: "#/components/schemas/userLogin"
      *      responses:
      *        '200':
-     *          description: Login Success.
+     *          $ref: "#/components/responses/200"
      *        '400':
-     *          description: Bad request.
+     *          $ref: "#/components/responses/400"
      *        '422':
-     *          description: Validation Error.
+     *          $ref: "#/components/responses/422"
      *        '426':
      *          description: Upgrade Required.
      */
@@ -94,7 +94,7 @@ router.post('/login', rateLimiter_1.bruteLimiter, authentication_1.validateLogin
         res.status(200).json(loggedUser);
     }
     catch (error) {
-        console.log(error);
+        winston_1.default.error(error);
         res.status(400).json(error.message);
     }
 }));

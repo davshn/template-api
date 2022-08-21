@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express'
 
 import { infoController } from '../controllers/user'
+import Logger from '../config/logger/winston'
 
 const router = Router()
 
@@ -19,18 +20,19 @@ router.get('/', async (req: Request, res: Response) => {
  *        - bearerAuth: []
  *      responses:
  *        '200':
- *          description: User information success.
+ *          $ref: "#/components/responses/200"
  *        '400':
- *          description: Bad request.
+ *          $ref: "#/components/responses/400"
  *        '401':
- *          description: Invalid user.
+ *          $ref: "#/components/responses/401"
  *        '422':
- *          description: Validation Error.
+ *          $ref: "#/components/responses/422"
  */
   try {
     const user = await infoController(req)
     res.status(200).json(user)
   } catch (error) {
+    Logger.error(error)
     res.status(400).send('Error al obtener datos de usuario')
   }
 })

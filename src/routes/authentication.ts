@@ -2,8 +2,8 @@ import { Router, Request, Response } from 'express'
 
 import { validateLogin, validateRegister } from '../middlewares/validations/authentication'
 import { loginController, registerController } from '../controllers/authentication'
-import { bruteLimiter } from '../middlewares/rateLimiter'
-import Logger from '../middlewares/logger/winston'
+import { bruteLimiter } from '../config/rateLimiter'
+import Logger from '../config/logger/winston'
 
 const router = Router()
 router.post('/register', validateRegister, async (req: Request, res: Response) => {
@@ -29,11 +29,11 @@ router.post('/register', validateRegister, async (req: Request, res: Response) =
    *                $ref: "#/components/schemas/newUser"
    *      responses:
    *        '201':
-   *          description: User Created.
+   *          $ref: "#/components/responses/200"
    *        '400':
-   *          description: Bad request.
+   *          $ref: "#/components/responses/400"
    *        '422':
-   *          description: Validation Error.
+   *          $ref: "#/components/responses/422"
    *        '426':
    *          description: Upgrade Required.
    */
@@ -69,11 +69,11 @@ router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Res
  *                $ref: "#/components/schemas/userLogin"
  *      responses:
  *        '200':
- *          description: Login Success.
+ *          $ref: "#/components/responses/200"
  *        '400':
- *          description: Bad request.
+ *          $ref: "#/components/responses/400"
  *        '422':
- *          description: Validation Error.
+ *          $ref: "#/components/responses/422"
  *        '426':
  *          description: Upgrade Required.
  */
@@ -81,7 +81,7 @@ router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Res
     const loggedUser = await loginController(req)
     res.status(200).json(loggedUser)
   } catch (error: any) {
-    console.log(error)
+    Logger.error(error)
     res.status(400).json(error.message)
   }
 })

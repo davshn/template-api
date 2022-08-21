@@ -11,7 +11,7 @@ const swaggerDefinition: OAS3Definition = {
       url: 'https://adoptapi.herokuapp.com'
     },
     {
-      url: 'http://localhost:3000'
+      url: 'http://localhost:4000'
     }
   ],
   components: {
@@ -19,6 +19,20 @@ const swaggerDefinition: OAS3Definition = {
       bearerAuth: {
         type: 'http',
         scheme: 'bearer'
+      }
+    },
+    responses: {
+      200: {
+        description: 'Success.'
+      },
+      400: {
+        description: 'Bad request.'
+      },
+      422: {
+        description: 'Validation error.'
+      },
+      401: {
+        description: 'Invalid User.'
       }
     },
     schemas: {

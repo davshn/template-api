@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { Response, NextFunction, Request } from 'express'
+
 import { decodedToken } from '../../types/types'
 
 const { TOKEN_KEY } = process.env

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
 import { models } from '../models'
-import { userToken } from '../types/types'
+import { userToken } from '../types/auth'
 
 const { TOKEN_KEY } = process.env
 
@@ -39,8 +39,7 @@ export const loginController = async (req: Request): Promise<userToken> => {
       const token = jwt.sign(
         {
           id: user.id,
-          email: user.email,
-          deviceInfo: await bcrypt.hash(deviceInfo, salt)
+          email: user.email
         },
         TOKEN_KEY as string,
         {
@@ -48,7 +47,7 @@ export const loginController = async (req: Request): Promise<userToken> => {
         }
       )
 
-      await user.set({ deviceInfo: deviceInfo })
+      await user.set({ deviceInfo: await bcrypt.hash(deviceInfo, salt) })
       await user.save()
 
       const loggedUser = {

@@ -3,9 +3,9 @@ import cors from 'cors'
 import helmet from 'helmet'
 
 import { error404, generalErrorHandler } from './middlewares/errors'
-import { rateLimiter } from './middlewares/rateLimiter'
-import corsConfig from './middlewares/cors'
-import morganMiddleware from './middlewares/logger/morgan'
+import { rateLimiter } from './config/rateLimiter'
+import corsConfig from './config/cors'
+import morganMiddleware from './config/logger/morgan'
 
 import routes from './routes'
 

@@ -42,10 +42,6 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false
         },
-        givenInAdoption: {
-            type: sequelize_1.DataTypes.INTEGER,
-            defaultValue: 0
-        },
         deviceInfo: {
             type: sequelize_1.DataTypes.STRING,
             allowNull: true

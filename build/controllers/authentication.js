@@ -47,12 +47,11 @@ const loginController = (req) => __awaiter(void 0, void 0, void 0, function* () 
             const salt = yield bcrypt_1.default.genSalt(10);
             const token = jsonwebtoken_1.default.sign({
                 id: user.id,
-                email: user.email,
-                deviceInfo: yield bcrypt_1.default.hash(deviceInfo, salt)
+                email: user.email
             }, TOKEN_KEY, {
                 expiresIn: '1h'
             });
-            yield user.set({ deviceInfo: deviceInfo });
+            yield user.set({ deviceInfo: yield bcrypt_1.default.hash(deviceInfo, salt) });
             yield user.save();
             const loggedUser = {
                 token: token
