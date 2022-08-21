@@ -28,11 +28,14 @@ const swaggerDefinition: OAS3Definition = {
       400: {
         description: 'Bad request.'
       },
+      401: {
+        description: 'Invalid User.'
+      },
       422: {
         description: 'Validation error.'
       },
-      401: {
-        description: 'Invalid User.'
+      426: {
+        description: 'Upgrade Required.'
       }
     },
     schemas: {

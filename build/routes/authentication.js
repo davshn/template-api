@@ -19,36 +19,6 @@ const rateLimiter_1 = require("../config/rateLimiter");
 const winston_1 = __importDefault(require("../config/logger/winston"));
 const router = (0, express_1.Router)();
 router.post('/register', authentication_1.validateRegister, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    /**
-     * Post track
-     * @openapi
-     * /authentication/register:
-     *    post:
-     *      tags:
-     *        - Authentication
-     *      summary: "User register"
-     *      description: Register a new user
-     *      parameters:
-     *       - in: header
-     *         name: Version
-     *         schema:
-     *         type: string
-     *         required: true
-     *      requestBody:
-     *          content:
-     *            application/json:
-     *              schema:
-     *                $ref: "#/components/schemas/newUser"
-     *      responses:
-     *        '201':
-     *          $ref: "#/components/responses/200"
-     *        '400':
-     *          $ref: "#/components/responses/400"
-     *        '422':
-     *          $ref: "#/components/responses/422"
-     *        '426':
-     *          description: Upgrade Required.
-     */
     try {
         yield (0, authentication_2.registerController)(req);
         res.status(201).send('Usuario registrado con exito');
@@ -58,37 +28,37 @@ router.post('/register', authentication_1.validateRegister, (req, res) => __awai
         res.status(400).send('Usuario ya registrado');
     }
 }));
+/**
+ * Post track
+ * @openapi
+ * /authentication/register:
+ *    post:
+ *      tags:
+ *        - Authentication
+ *      summary: "User register"
+ *      description: Register a new user
+ *      parameters:
+ *       - in: header
+ *         name: Version
+ *         schema:
+ *         type: string
+ *         required: true
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/newUser"
+ *      responses:
+ *        '201':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ *        '426':
+ *          $ref: "#/components/responses/426"
+ */
 router.post('/login', rateLimiter_1.bruteLimiter, authentication_1.validateLogin, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    /**
-     * Post track
-     * @openapi
-     * /authentication/login:
-     *    post:
-     *      tags:
-     *        - Authentication
-     *      summary: "User login"
-     *      description: Login user
-     *      parameters:
-     *       - in: header
-     *         name: Version
-     *         schema:
-     *         type: string
-     *         required: true
-     *      requestBody:
-     *          content:
-     *            application/json:
-     *              schema:
-     *                $ref: "#/components/schemas/userLogin"
-     *      responses:
-     *        '200':
-     *          $ref: "#/components/responses/200"
-     *        '400':
-     *          $ref: "#/components/responses/400"
-     *        '422':
-     *          $ref: "#/components/responses/422"
-     *        '426':
-     *          description: Upgrade Required.
-     */
     try {
         const loggedUser = yield (0, authentication_2.loginController)(req);
         res.status(200).json(loggedUser);
@@ -98,4 +68,34 @@ router.post('/login', rateLimiter_1.bruteLimiter, authentication_1.validateLogin
         res.status(400).json(error.message);
     }
 }));
+/**
+ * Post track
+ * @openapi
+ * /authentication/login:
+ *    post:
+ *      tags:
+ *        - Authentication
+ *      summary: "User login"
+ *      description: Login user
+ *      parameters:
+ *       - in: header
+ *         name: Version
+ *         schema:
+ *         type: string
+ *         required: true
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/userLogin"
+ *      responses:
+ *        '200':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ *        '426':
+ *          $ref: "#/components/responses/426"
+ */
 exports.default = router;

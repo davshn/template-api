@@ -18,27 +18,6 @@ const winston_1 = __importDefault(require("../config/logger/winston"));
 const router = (0, express_1.Router)();
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    /**
-   * Post track
-   * @openapi
-   * /user/:
-   *    get:
-   *      tags:
-   *        - User
-   *      summary: "User information"
-   *      description: Get user information
-   *      security:
-   *        - bearerAuth: []
-   *      responses:
-   *        '200':
-   *          $ref: "#/components/responses/200"
-   *        '400':
-   *          $ref: "#/components/responses/400"
-   *        '401':
-   *          $ref: "#/components/responses/401"
-   *        '422':
-   *          $ref: "#/components/responses/422"
-   */
     try {
         const user = yield (0, user_1.infoController)(req);
         res.status(200).json(user);
@@ -48,4 +27,25 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(400).send('Error al obtener datos de usuario');
     }
 }));
+/**
+ * Post track
+ * @openapi
+ * /user/:
+ *    get:
+ *      tags:
+ *        - User
+ *      summary: "User information"
+ *      description: Get user information
+ *      security:
+ *        - bearerAuth: []
+ *      responses:
+ *        '200':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '401':
+ *          $ref: "#/components/responses/401"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ */
 exports.default = router;

@@ -7,7 +7,15 @@ const router = Router()
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.get('/', async (req: Request, res: Response) => {
-  /**
+  try {
+    const user = await infoController(req)
+    res.status(200).json(user)
+  } catch (error) {
+    Logger.error(error)
+    res.status(400).send('Error al obtener datos de usuario')
+  }
+})
+/**
  * Post track
  * @openapi
  * /user/:
@@ -28,13 +36,5 @@ router.get('/', async (req: Request, res: Response) => {
  *        '422':
  *          $ref: "#/components/responses/422"
  */
-  try {
-    const user = await infoController(req)
-    res.status(200).json(user)
-  } catch (error) {
-    Logger.error(error)
-    res.status(400).send('Error al obtener datos de usuario')
-  }
-})
 
 export default router
