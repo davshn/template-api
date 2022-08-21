@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const winston_1 = __importDefault(require("../../config/logger/winston"));
-const ips = ['181.56.225.34'];
+const ips = [];
 const filterIps = (req, res, next) => {
     var _a;
     const ip = (_a = req.headers['x-forwarded-for']) !== null && _a !== void 0 ? _a : req.socket.remoteAddress;
