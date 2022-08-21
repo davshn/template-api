@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const winston_1 = __importDefault(require("../../config/logger/winston"));
 const { TOKEN_KEY } = process.env;
 const verifyAuthentication = (req, res, next) => {
     var _a;
@@ -13,7 +14,8 @@ const verifyAuthentication = (req, res, next) => {
         req.user = decoded;
         next();
     }
-    catch (err) {
+    catch (error) {
+        winston_1.default.error(error);
         res.status(401).send('Usuario no valido');
     }
 };

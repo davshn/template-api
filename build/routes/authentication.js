@@ -59,12 +59,12 @@ router.post('/register', authentication_1.validateRegister, (req, res) => __awai
  *          $ref: "#/components/responses/426"
  */
 router.post('/login', rateLimiter_1.bruteLimiter, authentication_1.validateLogin, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const email = req.body.email;
     try {
         const loggedUser = yield (0, authentication_2.loginController)(req);
         res.status(200).json(loggedUser);
     }
     catch (error) {
+        const email = req.body.email;
         winston_1.default.error(error.message + email);
         res.status(400).json(error.message);
     }

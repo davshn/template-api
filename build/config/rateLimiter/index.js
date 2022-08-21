@@ -14,7 +14,7 @@ exports.rateLimiter = (0, express_rate_limit_1.default)({
     handler: (req, res) => {
         var _a;
         const ip = (_a = req.headers['x-forwarded-for']) !== null && _a !== void 0 ? _a : req.socket.remoteAddress;
-        winston_1.default.error('Demasiadas solicitudes de' + ip);
+        winston_1.default.error('Demasiadas solicitudes de ' + ip);
         res.status(429).send('Demasiadas solicitudes, intenta de nuevo mas tarde');
     }
 });
@@ -23,8 +23,10 @@ exports.bruteLimiter = (0, express_rate_limit_1.default)({
     max: 5,
     standardHeaders: false,
     legacyHeaders: false,
-    handler: (_req, res) => {
-        winston_1.default.error('Limitado por demasiados intentos');
+    handler: (req, res) => {
+        var _a;
+        const ip = (_a = req.headers['x-forwarded-for']) !== null && _a !== void 0 ? _a : req.socket.remoteAddress;
+        winston_1.default.error('Demasiados intentos de login de ' + ip);
         res.status(429).send('Demasiados intentos');
     }
 });

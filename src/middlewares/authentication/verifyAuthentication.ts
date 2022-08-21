@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import { Response, NextFunction, Request } from 'express'
 
 import { decodedToken } from '../../types/types'
+import Logger from '../../config/logger/winston'
 
 const { TOKEN_KEY } = process.env
 
@@ -12,7 +13,8 @@ const verifyAuthentication = (req: Request, res: Response, next: NextFunction): 
     const decoded = jwt.verify(token as string, TOKEN_KEY as string)
     req.user = decoded as decodedToken
     next()
-  } catch (err) {
+  } catch (error) {
+    Logger.error(error)
     res.status(401).send('Usuario no valido')
   }
 }
