@@ -11,7 +11,7 @@ const validateResults = (req, res, next) => {
         return next();
     }
     catch (err) {
-        winston_1.default.warn('Error de validacion' + JSON.stringify(err.array()));
+        winston_1.default.warn('Error de validacion ' + JSON.stringify(err.array()));
         res.status(422);
         res.json(err.array());
     }

@@ -11,7 +11,7 @@ const corsConfig = {
             callback(null, true);
         }
         else {
-            winston_1.default.error('CORS incorrecto' + origin);
+            winston_1.default.error('CORS incorrecto ' + origin);
             // eslint-disable-next-line node/no-callback-literal
             callback('No permitido por CORS');
         }

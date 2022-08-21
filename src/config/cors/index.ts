@@ -9,7 +9,7 @@ const corsConfig = {
     if (whitelist.includes(origin) || origin === undefined) {
       callback(null, true)
     } else {
-      Logger.error('CORS incorrecto' + origin)
+      Logger.error('CORS incorrecto ' + origin)
       // eslint-disable-next-line node/no-callback-literal
       callback('No permitido por CORS')
     }

@@ -32,8 +32,8 @@ export const loginController = async (req: Request): Promise<userToken> => {
     const isBanned: boolean = user.isBanned
     const isVerified: boolean = user.isVerified
 
-    if (!isVerified) throw new Error('Usuario no verificado')
-    else if (isBanned) throw new Error('Usuario baneado')
+    if (!isVerified) throw new Error('Usuario no verificado ')
+    else if (isBanned) throw new Error('Usuario baneado ')
     else {
       const salt = await bcrypt.genSalt(10)
       const token = jwt.sign(
@@ -55,5 +55,5 @@ export const loginController = async (req: Request): Promise<userToken> => {
       }
       return loggedUser
     }
-  } else throw new Error('Datos incorrectos')
+  } else throw new Error('Datos incorrectos ')
 }

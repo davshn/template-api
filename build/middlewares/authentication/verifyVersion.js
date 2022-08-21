@@ -8,7 +8,7 @@ const versionProtection = (req, res, next) => {
     const { VERSION } = process.env;
     const version = req.header('Version');
     if (version !== VERSION) {
-        winston_1.default.warn('Version de aplicacion incorrecta' + version);
+        winston_1.default.warn('Version de aplicacion incorrecta ' + version);
         res.status(426).send('La ultima version de la aplicacion es requerida');
     }
     else

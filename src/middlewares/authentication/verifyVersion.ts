@@ -7,7 +7,7 @@ const versionProtection = (req: Request, res: Response, next: NextFunction): voi
   const version = req.header('Version') as string
 
   if (version !== VERSION) {
-    Logger.warn('Version de aplicacion incorrecta' + version)
+    Logger.warn('Version de aplicacion incorrecta ' + version)
     res.status(426).send('La ultima version de la aplicacion es requerida')
   } else next()
 }

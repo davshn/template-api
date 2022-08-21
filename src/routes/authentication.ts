@@ -47,11 +47,12 @@ router.post('/register', validateRegister, async (req: Request, res: Response) =
  */
 
 router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Response) => {
+  const email = req.body.email as string
   try {
     const loggedUser = await loginController(req)
     res.status(200).json(loggedUser)
   } catch (error: any) {
-    Logger.error(error)
+    Logger.error(error.message as string + email)
     res.status(400).json(error.message)
   }
 })

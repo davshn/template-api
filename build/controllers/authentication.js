@@ -40,9 +40,9 @@ const loginController = (req) => __awaiter(void 0, void 0, void 0, function* () 
         const isBanned = user.isBanned;
         const isVerified = user.isVerified;
         if (!isVerified)
-            throw new Error('Usuario no verificado');
+            throw new Error('Usuario no verificado ');
         else if (isBanned)
-            throw new Error('Usuario baneado');
+            throw new Error('Usuario baneado ');
         else {
             const salt = yield bcrypt_1.default.genSalt(10);
             const token = jsonwebtoken_1.default.sign({
@@ -60,6 +60,6 @@ const loginController = (req) => __awaiter(void 0, void 0, void 0, function* () 
         }
     }
     else
-        throw new Error('Datos incorrectos');
+        throw new Error('Datos incorrectos ');
 });
 exports.loginController = loginController;

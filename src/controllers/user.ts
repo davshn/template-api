@@ -13,7 +13,6 @@ export const infoController = async (req: Request): Promise<any> => {
       'documentType',
       'documentNumber',
       'phone',
-      'givenInAdoption',
       'role'
     ],
     where: { id: user.id }
