@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         deviceInfo: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.JSON,
             allowNull: true
         },
         role: {

@@ -1,11 +1,10 @@
 import { Request } from 'express'
-import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import { v4 as uuidv4 } from 'uuid'
 
 import { models } from '../models'
 import { userToken } from '../types/auth'
-
-const { TOKEN_KEY } = process.env
+import { signAuthToken, signRefreshToken } from '../utils/signTokens'
 
 export const registerController = async (req: Request): Promise<any> => {
   const salt = await bcrypt.genSalt(10)
@@ -25,35 +24,22 @@ export const loginController = async (req: Request): Promise<userToken> => {
   const email = req.body.email
   const password = req.body.password
   const deviceInfo = req.body.deviceInfo
-
   const user = await models.User.findOne({ where: { email } }) as any
-  const isAuthenticated = await bcrypt.compare(password, user.password)
-  if (user !== null && isAuthenticated) {
-    const isBanned: boolean = user.isBanned
-    const isVerified: boolean = user.isVerified
 
-    if (!isVerified) throw new Error('Usuario no verificado ')
-    else if (isBanned) throw new Error('Usuario baneado ')
-    else {
-      const salt = await bcrypt.genSalt(10)
-      const token = jwt.sign(
-        {
-          id: user.id,
-          email: user.email
-        },
-        TOKEN_KEY as string,
-        {
-          expiresIn: '1h'
-        }
-      )
+  if (user === null) throw new Error('Usuario no encontrado')
+  if (!await bcrypt.compare(password, user.password)) throw new Error('Datos incorrectos ')
+  if (!(user.isVerified as boolean)) throw new Error('Usuario no verificado ')
+  if (user.isBanned as boolean) throw new Error('Usuario baneado ')
 
-      await user.set({ deviceInfo: await bcrypt.hash(deviceInfo, salt) })
-      await user.save()
+  const tokenId = uuidv4()
+  const authToken = signAuthToken(user.id, user.email)
+  const refToken = signRefreshToken(tokenId)
 
-      const loggedUser = {
-        token: token
-      }
-      return loggedUser
-    }
-  } else throw new Error('Datos incorrectos ')
+  await user.set({ deviceInfo: { ...user.deviceInfo, [deviceInfo]: tokenId } })
+  await user.save()
+
+  return {
+    token: authToken,
+    refreshToken: refToken
+  }
 }

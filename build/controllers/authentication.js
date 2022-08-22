@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginController = exports.registerController = void 0;
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const uuid_1 = require("uuid");
 const models_1 = require("../models");
-const { TOKEN_KEY } = process.env;
+const signTokens_1 = require("../utils/signTokens");
 const registerController = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const salt = yield bcrypt_1.default.genSalt(10);
     yield models_1.models.User.create({
@@ -35,31 +35,22 @@ const loginController = (req) => __awaiter(void 0, void 0, void 0, function* () 
     const password = req.body.password;
     const deviceInfo = req.body.deviceInfo;
     const user = yield models_1.models.User.findOne({ where: { email } });
-    const isAuthenticated = yield bcrypt_1.default.compare(password, user.password);
-    if (user !== null && isAuthenticated) {
-        const isBanned = user.isBanned;
-        const isVerified = user.isVerified;
-        if (!isVerified)
-            throw new Error('Usuario no verificado ');
-        else if (isBanned)
-            throw new Error('Usuario baneado ');
-        else {
-            const salt = yield bcrypt_1.default.genSalt(10);
-            const token = jsonwebtoken_1.default.sign({
-                id: user.id,
-                email: user.email
-            }, TOKEN_KEY, {
-                expiresIn: '1h'
-            });
-            yield user.set({ deviceInfo: yield bcrypt_1.default.hash(deviceInfo, salt) });
-            yield user.save();
-            const loggedUser = {
-                token: token
-            };
-            return loggedUser;
-        }
-    }
-    else
+    if (user === null)
+        throw new Error('Usuario no encontrado');
+    if (!(yield bcrypt_1.default.compare(password, user.password)))
         throw new Error('Datos incorrectos ');
+    if (!user.isVerified)
+        throw new Error('Usuario no verificado ');
+    if (user.isBanned)
+        throw new Error('Usuario baneado ');
+    const tokenId = (0, uuid_1.v4)();
+    const authToken = (0, signTokens_1.signAuthToken)(user.id, user.email);
+    const refToken = (0, signTokens_1.signRefreshToken)(tokenId);
+    yield user.set({ deviceInfo: Object.assign(Object.assign({}, user.deviceInfo), { [deviceInfo]: tokenId }) });
+    yield user.save();
+    return {
+        token: authToken,
+        refreshToken: refToken
+    };
 });
 exports.loginController = loginController;

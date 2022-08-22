@@ -11,7 +11,7 @@ module.exports = (sequelize: Sequelize) => {
     email!: string
     phone!: string
     password!: string
-    deviceInfo!: string
+    deviceInfo!: object
     role!: userRoles
     isBanned!: boolean
     isVerified!: boolean
@@ -55,7 +55,7 @@ module.exports = (sequelize: Sequelize) => {
       allowNull: false
     },
     deviceInfo: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSON,
       allowNull: true
     },
     role: {

@@ -7,7 +7,7 @@ export interface UserAttributes {
   email: string
   phone: string
   password: string
-  deviceInfo: string
+  deviceInfo: object
   role: userRoles
   isBanned: boolean
   isVerified: boolean
@@ -21,6 +21,7 @@ export enum documentTypes {
 
 export interface userToken {
   token: string
+  refreshToken: string
 }
 
 export enum userRoles {
