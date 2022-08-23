@@ -85,6 +85,18 @@ const swaggerDefinition = {
                         type: 'string'
                     }
                 }
+            },
+            userRefresh: {
+                type: 'object',
+                required: ['refreshToken', 'deviceInfo'],
+                properties: {
+                    refreshToken: {
+                        type: 'string'
+                    },
+                    deviceInfo: {
+                        type: 'string'
+                    }
+                }
             }
         }
     }

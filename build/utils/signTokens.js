@@ -16,9 +16,10 @@ const signAuthToken = (userId, userEmail) => {
     return token;
 };
 exports.signAuthToken = signAuthToken;
-const signRefreshToken = (tokenId) => {
+const signRefreshToken = (tokenId, userEmail) => {
     const token = jsonwebtoken_1.default.sign({
-        id: tokenId
+        id: tokenId,
+        email: userEmail
     }, TOKEN_KEY, {
         expiresIn: '30d'
     });

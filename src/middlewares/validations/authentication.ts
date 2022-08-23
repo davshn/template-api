@@ -81,3 +81,19 @@ export const validateRegister = [
     validateResults(req, res, next)
   }
 ]
+
+export const validateRefresh = [
+  body('refreshToken', 'Token no valido')
+    .exists()
+    .isString()
+    .isLength({ min: 10 })
+    .escape(),
+  body('deviceInfo', 'La informacion del dispositivo es requerida')
+    .exists()
+    .isString()
+    .isLength({ min: 5 })
+    .escape(),
+  (req: Request, res: Response, next: NextFunction) => {
+    validateResults(req, res, next)
+  }
+]

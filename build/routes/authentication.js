@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const authentication_1 = require("../middlewares/validations/authentication");
+const verifyTokens_1 = require("../middlewares/authentication/verifyTokens");
 const authentication_2 = require("../controllers/authentication");
 const rateLimiter_1 = require("../config/rateLimiter");
 const winston_1 = __importDefault(require("../config/logger/winston"));
@@ -89,6 +90,47 @@ router.post('/login', rateLimiter_1.bruteLimiter, authentication_1.validateLogin
  *            application/json:
  *              schema:
  *                $ref: "#/components/schemas/userLogin"
+ *      responses:
+ *        '200':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ *        '426':
+ *          $ref: "#/components/responses/426"
+ */
+router.post('/refresh', authentication_1.validateRefresh, verifyTokens_1.verifyRefresh, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const loggedUser = yield (0, authentication_2.refreshController)(req);
+        res.status(200).json(loggedUser);
+    }
+    catch (error) {
+        winston_1.default.error(error.message);
+        res.status(400).json(error.message);
+    }
+}));
+/**
+ * Post track
+ * @openapi
+ * /authentication/refresh:
+ *    post:
+ *      tags:
+ *        - Authentication
+ *      summary: "User refresh token"
+ *      description: Refresh token user
+ *      parameters:
+ *       - in: header
+ *         name: Version
+ *         schema:
+ *         type: string
+ *         required: true
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              name: refreshToken
+ *              schema:
+ *                $ref: "#/components/schemas/userRefresh"
  *      responses:
  *        '200':
  *          $ref: "#/components/responses/200"

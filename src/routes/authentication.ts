@@ -1,7 +1,8 @@
 import { Router, Request, Response } from 'express'
 
-import { validateLogin, validateRegister } from '../middlewares/validations/authentication'
-import { loginController, registerController } from '../controllers/authentication'
+import { validateLogin, validateRegister, validateRefresh } from '../middlewares/validations/authentication'
+import { verifyRefresh } from '../middlewares/authentication/verifyTokens'
+import { loginController, registerController, refreshController } from '../controllers/authentication'
 import { bruteLimiter } from '../config/rateLimiter'
 import Logger from '../config/logger/winston'
 
@@ -76,6 +77,47 @@ router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Res
  *            application/json:
  *              schema:
  *                $ref: "#/components/schemas/userLogin"
+ *      responses:
+ *        '200':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ *        '426':
+ *          $ref: "#/components/responses/426"
+ */
+
+router.post('/refresh', validateRefresh, verifyRefresh, async (req: Request, res: Response) => {
+  try {
+    const loggedUser = await refreshController(req)
+    res.status(200).json(loggedUser)
+  } catch (error: any) {
+    Logger.error(error.message)
+    res.status(400).json(error.message)
+  }
+})
+/**
+ * Post track
+ * @openapi
+ * /authentication/refresh:
+ *    post:
+ *      tags:
+ *        - Authentication
+ *      summary: "User refresh token"
+ *      description: Refresh token user
+ *      parameters:
+ *       - in: header
+ *         name: Version
+ *         schema:
+ *         type: string
+ *         required: true
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              name: refreshToken
+ *              schema:
+ *                $ref: "#/components/schemas/userRefresh"
  *      responses:
  *        '200':
  *          $ref: "#/components/responses/200"

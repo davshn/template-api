@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateRegister = exports.validateLogin = exports.validateToken = exports.validateVersion = void 0;
+exports.validateRefresh = exports.validateRegister = exports.validateLogin = exports.validateToken = exports.validateVersion = void 0;
 const express_validator_1 = require("express-validator");
 const validateResults_1 = __importDefault(require("./validateResults"));
 exports.validateVersion = [
@@ -77,6 +77,21 @@ exports.validateRegister = [
     (0, express_validator_1.body)('phone', 'Telefono no valido')
         .exists()
         .isInt(),
+    (req, res, next) => {
+        (0, validateResults_1.default)(req, res, next);
+    }
+];
+exports.validateRefresh = [
+    (0, express_validator_1.body)('refreshToken', 'Token no valido')
+        .exists()
+        .isString()
+        .isLength({ min: 10 })
+        .escape(),
+    (0, express_validator_1.body)('deviceInfo', 'La informacion del dispositivo es requerida')
+        .exists()
+        .isString()
+        .isLength({ min: 5 })
+        .escape(),
     (req, res, next) => {
         (0, validateResults_1.default)(req, res, next);
     }

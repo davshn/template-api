@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize } from 'sequelize'
-import { UserAttributes, documentTypes, userRoles } from '../types/auth'
+import { UserAttributes, documentTypes, userRoles, deviceTokens } from '../types/auth'
 
 module.exports = (sequelize: Sequelize) => {
   class User extends Model<UserAttributes> implements UserAttributes {
@@ -11,7 +11,7 @@ module.exports = (sequelize: Sequelize) => {
     email!: string
     phone!: string
     password!: string
-    deviceInfo!: object
+    deviceInfo!: deviceTokens
     role!: userRoles
     isBanned!: boolean
     isVerified!: boolean

@@ -5,7 +5,7 @@ import swaggerSetup from '../docs/swagger'
 import user from './user'
 import authentication from './authentication'
 import versionProtection from '../middlewares/authentication/verifyVersion'
-import verifyAuthentication from '../middlewares/authentication/verifyAuthentication'
+import { verifyAuthentication } from '../middlewares/authentication/verifyTokens'
 import { validateVersion, validateToken } from '../middlewares/validations/authentication'
 
 const router = Router({ strict: true })

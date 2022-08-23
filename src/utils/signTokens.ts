@@ -16,10 +16,11 @@ export const signAuthToken = (userId: string, userEmail: string): string => {
   return token
 }
 
-export const signRefreshToken = (tokenId: string): string => {
+export const signRefreshToken = (tokenId: string, userEmail: string): string => {
   const token = jwt.sign(
     {
-      id: tokenId
+      id: tokenId,
+      email: userEmail
     },
     TOKEN_KEY as string,
     {
