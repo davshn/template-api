@@ -14,7 +14,8 @@ export const verifyAuthentication = (req: Request, res: Response, next: NextFunc
     req.user = decoded
     next()
   } catch (error: any) {
-    Logger.error('AuthToken no valido ' + (error.message as string))
+    const ip = req.headers['x-forwarded-for'] as string ?? req.socket.remoteAddress
+    Logger.error('AuthToken no valido ' + (error.message as string) + ip)
     res.status(401).send('Usuario no valido')
   }
 }
@@ -27,7 +28,8 @@ export const verifyRefresh = (req: Request, res: Response, next: NextFunction): 
     req.user = decoded
     next()
   } catch (error: any) {
-    Logger.error('RefreshToken no valido ' + (error.message as string))
+    const ip = req.headers['x-forwarded-for'] as string ?? req.socket.remoteAddress
+    Logger.error('RefreshToken no valido ' + (error.message as string) + ip)
     res.status(401).send('Usuario no valido')
   }
 }

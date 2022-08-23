@@ -93,7 +93,8 @@ router.post('/refresh', validateRefresh, verifyRefresh, async (req: Request, res
     const loggedUser = await refreshController(req)
     res.status(200).json(loggedUser)
   } catch (error: any) {
-    Logger.error(error.message)
+    const ip = req.headers['x-forwarded-for'] as string ?? req.socket.remoteAddress
+    Logger.error((error.message as string) + ' ' + ip)
     res.status(400).json(error.message)
   }
 })

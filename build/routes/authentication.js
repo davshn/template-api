@@ -101,12 +101,14 @@ router.post('/login', rateLimiter_1.bruteLimiter, authentication_1.validateLogin
  *          $ref: "#/components/responses/426"
  */
 router.post('/refresh', authentication_1.validateRefresh, verifyTokens_1.verifyRefresh, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const loggedUser = yield (0, authentication_2.refreshController)(req);
         res.status(200).json(loggedUser);
     }
     catch (error) {
-        winston_1.default.error(error.message);
+        const ip = (_a = req.headers['x-forwarded-for']) !== null && _a !== void 0 ? _a : req.socket.remoteAddress;
+        winston_1.default.error(error.message + ' ' + ip);
         res.status(400).json(error.message);
     }
 }));
