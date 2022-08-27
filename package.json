@@ -1,5 +1,5 @@
 {
-  "name": "adopt-api",
+  "name": "template-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,40 +11,40 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davshn/adopt-api.git"
+    "url": "git+https://github.com/davshn/template-api.git"
   },
   "keywords": [],
   "author": "Davshn",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/davshn/adopt-api/issues"
+    "url": "https://github.com/davshn/template-api/issues"
   },
-  "homepage": "https://github.com/davshn/adopt-api#readme",
+  "homepage": "https://github.com/davshn/template-api#readme",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
-    "@types/jsonwebtoken": "^8.5.8",
+    "@types/jsonwebtoken": "^8.5.9",
     "@types/morgan": "^1.9.3",
-    "@types/node": "^18.7.8",
+    "@types/node": "^18.7.13",
     "@types/swagger-jsdoc": "^6.0.1",
     "@types/swagger-ui-express": "^4.1.3",
     "@types/uuid": "^8.3.4",
     "ts-node-dev": "^2.0.0",
     "ts-standard": "^11.0.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.2"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "express-rate-limit": "^6.5.1",
+    "express-rate-limit": "^6.5.2",
     "express-validator": "^6.14.2",
     "helmet": "^5.1.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "pg": "^8.7.3",
+    "pg": "^8.8.0",
     "sequelize": "^6.21.4",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0",
