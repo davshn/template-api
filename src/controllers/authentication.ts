@@ -58,6 +58,7 @@ export const refreshController = async (req: Request): Promise<userToken> => {
     await user.save()
     throw new Error('Refresh Token en desuso ')
   }
+
   const tokenId = uuidv4()
   const authToken = signAuthToken(user.id, user.email)
   const refToken = signRefreshToken(tokenId, user.email)
