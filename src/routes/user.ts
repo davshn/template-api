@@ -1,15 +1,16 @@
 import { Router, Request, Response } from 'express'
 
-import { infoController } from '../controllers/user'
 import Logger from '../config/logger/winston'
+
+import user from '../controllers/user'
 
 const router = Router()
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const user = await infoController(req)
-    res.status(200).json(user)
+    const userInfo = await user.infoController(req)
+    res.status(200).json(userInfo)
   } catch (error) {
     Logger.error(error)
     res.status(400).send('Error al obtener datos de usuario')

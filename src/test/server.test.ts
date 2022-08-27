@@ -1,5 +1,6 @@
-import server from './server'
 import request from 'supertest'
+
+import server from '../server'
 
 describe('Server is running', () => {
   test('It should respond with a 404 status in /', async () => {

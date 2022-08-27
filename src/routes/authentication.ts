@@ -1,15 +1,16 @@
 import { Router, Request, Response } from 'express'
 
-import { validateLogin, validateRegister, validateRefresh } from '../middlewares/validations/authentication'
-import { verifyRefresh } from '../middlewares/authentication/verifyTokens'
-import { loginController, registerController, refreshController } from '../controllers/authentication'
 import { bruteLimiter } from '../config/rateLimiter'
 import Logger from '../config/logger/winston'
+
+import { validateLogin, validateRegister, validateRefresh } from '../middlewares/validations/authentication'
+import { verifyRefresh } from '../middlewares/authentication/verifyTokens'
+import authentication from '../controllers/authentication'
 
 const router = Router()
 router.post('/register', validateRegister, async (req: Request, res: Response) => {
   try {
-    await registerController(req)
+    await authentication.registerController(req)
     res.status(201).send('Usuario registrado con exito')
   } catch (error) {
     Logger.error(error)
@@ -49,7 +50,7 @@ router.post('/register', validateRegister, async (req: Request, res: Response) =
 
 router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Response) => {
   try {
-    const loggedUser = await loginController(req)
+    const loggedUser = await authentication.loginController(req)
     res.status(200).json(loggedUser)
   } catch (error: any) {
     const email = req.body.email as string
@@ -90,7 +91,7 @@ router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Res
 
 router.post('/refresh', validateRefresh, verifyRefresh, async (req: Request, res: Response) => {
   try {
-    const loggedUser = await refreshController(req)
+    const loggedUser = await authentication.refreshController(req)
     res.status(200).json(loggedUser)
   } catch (error: any) {
     const ip = req.headers['x-forwarded-for'] as string ?? req.socket.remoteAddress
