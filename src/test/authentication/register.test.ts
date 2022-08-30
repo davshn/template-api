@@ -2,6 +2,7 @@ import request from 'supertest'
 
 import { models } from '../../models'
 import server from '../../server'
+import { destroyTestUser } from '../testUtilities'
 import { userModel } from '../../types/auth'
 
 const { VERSION } = process.env
@@ -18,7 +19,7 @@ describe('Register should create users correctly avoiding bad info', () => {
   }
 
   beforeAll(async () => {
-    await models.User.destroy({ where: { email: newUser.email } })
+    await destroyTestUser()
   })
 
   test('It should respond with a 422 status on bad info', async () => {
@@ -42,6 +43,6 @@ describe('Register should create users correctly avoiding bad info', () => {
   })
 
   afterAll(async () => {
-    await models.User.destroy({ where: { email: newUser.email } })
+    await destroyTestUser()
   })
 })

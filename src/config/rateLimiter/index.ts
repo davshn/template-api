@@ -16,7 +16,7 @@ export const rateLimiter = rateLimit({
 
 export const bruteLimiter = rateLimit({
   windowMs: 5 * 60 * 60 * 1000,
-  max: 5,
+  max: 6,
   standardHeaders: false,
   legacyHeaders: false,
   handler: (req, res) => {
