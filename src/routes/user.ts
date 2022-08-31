@@ -7,7 +7,7 @@ import user from '../controllers/user'
 const router = Router()
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-router.get('/', async (req: Request, res: Response) => {
+router.get('/info', async (req: Request, res: Response) => {
   try {
     const userInfo = await user.infoController(req)
     res.status(200).json(userInfo)
@@ -19,7 +19,7 @@ router.get('/', async (req: Request, res: Response) => {
 /**
  * Post track
  * @openapi
- * /user/:
+ * /user/info:
  *    get:
  *      tags:
  *        - User

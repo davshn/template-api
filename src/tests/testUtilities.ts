@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 
 import { models } from '../models'
-import { userToken, userModel, userRoles } from '../types/auth'
+import { userToken, userModel, userRoles } from '../types/auth.d'
 import { signAuthToken } from '../utils/signTokens'
 
 export const registerTestUser = async (): Promise<void> => {
