@@ -9,7 +9,7 @@ import { userModel } from '../../types/auth'
 const { VERSION } = process.env
 
 describe('Refresh should give a new token', () => {
-  let refToken = ''
+  let refToken: string
   const deviceInfo = 'testDevice'
   let refreshInfo = {}
   beforeAll(async () => {
