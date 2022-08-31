@@ -4,8 +4,8 @@ import { decodedToken } from '../../types/types'
 import { models } from '../../models'
 
 export const infoController = async (req: Request): Promise<any> => {
-  const user = req.user as decodedToken
-  const userInfo = await models.User.findOne({
+  const userInfo = req.user as decodedToken
+  const user = await models.User.findOne({
     attributes: [
       'name',
       'lastname',
@@ -15,7 +15,7 @@ export const infoController = async (req: Request): Promise<any> => {
       'phone',
       'role'
     ],
-    where: { id: user.id }
+    where: { id: userInfo.id }
   })
-  return userInfo
+  return user
 }

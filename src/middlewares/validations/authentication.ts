@@ -97,3 +97,14 @@ export const validateRefresh = [
     validateResults(req, res, next)
   }
 ]
+
+export const validateLogout = [
+  body('deviceInfo', 'La informacion del dispositivo es requerida')
+    .exists()
+    .isString()
+    .isLength({ min: 5 })
+    .escape(),
+  (req: Request, res: Response, next: NextFunction) => {
+    validateResults(req, res, next)
+  }
+]

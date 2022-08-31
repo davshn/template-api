@@ -3,8 +3,8 @@ import { Router, Request, Response } from 'express'
 import { bruteLimiter } from '../config/rateLimiter'
 import Logger from '../config/logger/winston'
 
-import { validateLogin, validateRegister, validateRefresh } from '../middlewares/validations/authentication'
-import { verifyRefresh } from '../middlewares/authentication/verifyTokens'
+import { validateLogin, validateRegister, validateRefresh, validateLogout, validateToken } from '../middlewares/validations/authentication'
+import { verifyRefresh, verifyAuthentication } from '../middlewares/authentication/verifyTokens'
 import authentication from '../controllers/authentication'
 
 const router = Router()
@@ -131,4 +131,46 @@ router.post('/refresh', validateRefresh, verifyRefresh, async (req: Request, res
  *          $ref: "#/components/responses/426"
  */
 
+router.post('/logout', validateLogout, validateToken, verifyAuthentication, async (req: Request, res: Response) => {
+  try {
+    await authentication.logoutController(req)
+    res.status(200).send('Usuario desconectado con exito')
+  } catch (error: any) {
+    res.status(400).json(error.message)
+  }
+})
+/**
+ * Post track
+ * @openapi
+ * /authentication/logout:
+ *    post:
+ *      tags:
+ *        - Authentication
+ *      summary: "User logout"
+ *      description: Logout user
+ *      parameters:
+ *       - in: header
+ *         name: Version
+ *         schema:
+ *         type: string
+ *         required: true
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/userLogout"
+ *      security:
+ *        - bearerAuth: []
+ *      responses:
+ *        '200':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '401':
+ *          $ref: "#/components/responses/401"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ *        '426':
+ *          $ref: "#/components/responses/426"
+ */
 export default router

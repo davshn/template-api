@@ -93,6 +93,15 @@ const swaggerDefinition: OAS3Definition = {
             type: 'string'
           }
         }
+      },
+      userLogout: {
+        type: 'object',
+        required: ['deviceInfo'],
+        properties: {
+          deviceInfo: {
+            type: 'string'
+          }
+        }
       }
     }
   }
