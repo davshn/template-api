@@ -1,17 +1,19 @@
 import { Router } from 'express'
 import swaggerUi from 'swagger-ui-express'
+import fs from 'fs'
+import path from 'path'
 
 import swaggerSetup from '../docs/swagger'
-import user from './user'
-import authentication from './authentication'
-import versionProtection from '../middlewares/authentication/verifyVersion'
-import { verifyAuthentication } from '../middlewares/authentication/verifyTokens'
-import { validateVersion, validateToken } from '../middlewares/validations/authentication'
 
 const router = Router({ strict: true })
+const basename = path.basename(__filename)
 
-router.use('/user', validateToken, verifyAuthentication, user)
-router.use('/authentication', validateVersion, versionProtection, authentication)
+fs.readdirSync(path.join(__dirname, './'))
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  .filter((file: string) => file.indexOf('.') !== 0 && file !== basename).forEach(async (file) => {
+    const route = await import(path.join(__dirname, './', file))
+    router.use(`/${file.slice(0, -3)}`, route.default)
+  })
 
 // Documentation
 router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup))

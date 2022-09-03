@@ -32,7 +32,7 @@ module.exports = (sequelize: Sequelize) => {
       allowNull: false
     },
     documentNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },

@@ -3,11 +3,13 @@ import { Router, Request, Response } from 'express'
 import Logger from '../config/logger/winston'
 
 import user from '../controllers/user'
+import { validateToken } from '../middlewares/validations/authentication'
+import { verifyAuthentication } from '../middlewares/authentication/verifyTokens'
 
 const router = Router()
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-router.get('/info', async (req: Request, res: Response) => {
+router.get('/info', validateToken, verifyAuthentication, async (req: Request, res: Response) => {
   try {
     const userInfo = await user.infoController(req)
     res.status(200).json(userInfo)

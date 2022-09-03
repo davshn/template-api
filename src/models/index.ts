@@ -7,7 +7,6 @@ dotenv.config()
 
 const { DATABASE_URL } = process.env
 const basename = path.basename(__filename)
-const modelDefiners: Function[] = []
 
 const config = {
   dialectOptions: {
@@ -21,15 +20,11 @@ const config = {
 const sequelize = new Sequelize(DATABASE_URL as string, config)
 
 fs.readdirSync(path.join(__dirname, './'))
-  .filter((file: string) =>
-    file.indexOf('.') !== 0 && file !== basename && (file.slice(-3) === '.ts' || file.slice(-3) === '.js')
-  )
-  .forEach((file: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    modelDefiners.push(require(path.join(__dirname, './', file)))
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  .filter((file: string) => file.indexOf('.') !== 0 && file !== basename).forEach(async (file) => {
+    const model = await import(path.join(__dirname, './', file))
+    model.default(sequelize)
   })
-
-modelDefiners.forEach((model: Function) => model(sequelize))
 
 export const models = sequelize.models
 

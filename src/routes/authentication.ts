@@ -3,12 +3,13 @@ import { Router, Request, Response } from 'express'
 import { bruteLimiter } from '../config/rateLimiter'
 import Logger from '../config/logger/winston'
 
-import { validateLogin, validateRegister, validateRefresh, validateLogout, validateToken } from '../middlewares/validations/authentication'
+import { validateLogin, validateVersion, validateRegister, validateRefresh, validateLogout, validateToken } from '../middlewares/validations/authentication'
+import versionProtection from '../middlewares/authentication/verifyVersion'
 import { verifyRefresh, verifyAuthentication } from '../middlewares/authentication/verifyTokens'
 import authentication from '../controllers/authentication'
 
 const router = Router()
-router.post('/register', validateRegister, async (req: Request, res: Response) => {
+router.post('/register', validateVersion, validateRegister, versionProtection, async (req: Request, res: Response) => {
   try {
     await authentication.registerController(req)
     res.status(201).send('Usuario registrado con exito')
@@ -48,7 +49,7 @@ router.post('/register', validateRegister, async (req: Request, res: Response) =
  *          $ref: "#/components/responses/426"
  */
 
-router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Response) => {
+router.post('/login', bruteLimiter, validateVersion, validateLogin, versionProtection, async (req: Request, res: Response) => {
   try {
     const loggedUser = await authentication.loginController(req)
     res.status(200).json(loggedUser)
@@ -89,7 +90,7 @@ router.post('/login', bruteLimiter, validateLogin, async (req: Request, res: Res
  *          $ref: "#/components/responses/426"
  */
 
-router.post('/refresh', validateRefresh, verifyRefresh, async (req: Request, res: Response) => {
+router.post('/refresh', validateVersion, validateRefresh, versionProtection, verifyRefresh, async (req: Request, res: Response) => {
   try {
     const loggedUser = await authentication.refreshController(req)
     res.status(200).json(loggedUser)
@@ -131,7 +132,7 @@ router.post('/refresh', validateRefresh, verifyRefresh, async (req: Request, res
  *          $ref: "#/components/responses/426"
  */
 
-router.post('/logout', validateLogout, validateToken, verifyAuthentication, async (req: Request, res: Response) => {
+router.post('/logout', validateVersion, validateLogout, validateToken, versionProtection, verifyAuthentication, async (req: Request, res: Response) => {
   try {
     await authentication.logoutController(req)
     res.status(200).send('Usuario desconectado con exito')
