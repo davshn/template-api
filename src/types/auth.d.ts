@@ -36,3 +36,7 @@ export interface userToken {
 export interface deviceTokens {
   [key: string]: string
 }
+
+export interface controller {
+  [key: string]: Function
+}

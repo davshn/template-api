@@ -3,7 +3,7 @@ import { decodedToken } from '../../types/types'
 import { userModel } from '../../types/auth'
 import { models } from '../../models'
 
-export const logoutController = async (req: Request): Promise<any> => {
+const logoutController = async (req: Request): Promise<any> => {
   const deviceInfo = req.body.deviceInfo
   const userInfo = req.user as decodedToken
 
@@ -11,3 +11,5 @@ export const logoutController = async (req: Request): Promise<any> => {
   user.set({ deviceInfo: { ...user.deviceInfo, [deviceInfo]: '' } })
   await user.save()
 }
+
+export default logoutController

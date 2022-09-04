@@ -3,7 +3,7 @@ import { decodedToken } from '../../types/types'
 
 import { models } from '../../models'
 
-export const infoController = async (req: Request): Promise<any> => {
+const infoController = async (req: Request): Promise<any> => {
   const userInfo = req.user as decodedToken
   const user = await models.User.findOne({
     attributes: [
@@ -19,3 +19,5 @@ export const infoController = async (req: Request): Promise<any> => {
   })
   return user
 }
+
+export default infoController
