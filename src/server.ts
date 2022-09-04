@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
+import dotenv from 'dotenv'
 
 import { error404, generalErrorHandler } from './middlewares/errors'
 import { rateLimiter } from './config/rateLimiter'
@@ -12,6 +13,7 @@ import routes from './routes'
 const server = express()
 
 // Middlewares
+dotenv.config()
 server.use(helmet())
 server.use(express.urlencoded({ extended: true, limit: '100kb' }))
 server.use(express.json({ limit: '100kb' }))
