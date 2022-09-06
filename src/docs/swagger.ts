@@ -1,5 +1,8 @@
 import swaggerJSDoc, { OAS3Definition, OAS3Options } from 'swagger-jsdoc'
 
+import { responses } from './responses'
+import { schemas } from './schemas'
+
 const swaggerDefinition: OAS3Definition = {
   openapi: '3.0.3',
   info: {
@@ -21,107 +24,8 @@ const swaggerDefinition: OAS3Definition = {
         scheme: 'bearer'
       }
     },
-    responses: {
-      200: {
-        description: 'Success.'
-      },
-      400: {
-        description: 'Bad request.'
-      },
-      401: {
-        description: 'Invalid User.'
-      },
-      422: {
-        description: 'Validation error.'
-      },
-      426: {
-        description: 'Upgrade Required.'
-      }
-    },
-    schemas: {
-      newUser: {
-        type: 'object',
-        required: ['name', 'lastname', 'documentNumber', 'documentType', 'email', 'password', 'phone'],
-        properties: {
-          name: {
-            type: 'string'
-          },
-          lastname: {
-            type: 'string'
-          },
-          documentNumber: {
-            type: 'string'
-          },
-          documentType: {
-            type: 'string',
-            enum: ['CC', 'NI', 'CE']
-          },
-          email: {
-            type: 'string'
-          },
-          password: {
-            type: 'string'
-          },
-          phone: {
-            type: 'string'
-          }
-        }
-      },
-      userEdit: {
-        type: 'object',
-        required: [],
-        properties: {
-          name: {
-            type: 'string'
-          },
-          lastname: {
-            type: 'string'
-          },
-          password: {
-            type: 'string'
-          },
-          phone: {
-            type: 'string'
-          }
-        }
-      },
-      userLogin: {
-        type: 'object',
-        required: ['email', 'password', 'deviceInfo'],
-        properties: {
-          email: {
-            type: 'string'
-          },
-          password: {
-            type: 'string'
-          },
-          deviceInfo: {
-            type: 'string'
-          }
-        }
-      },
-      userRefresh: {
-        type: 'object',
-        required: ['refreshToken', 'deviceInfo'],
-        properties: {
-          refreshToken: {
-            type: 'string'
-          },
-          deviceInfo: {
-            type: 'string'
-          }
-        }
-      },
-      userLogout: {
-        type: 'object',
-        required: ['deviceInfo'],
-        properties: {
-          deviceInfo: {
-            type: 'string'
-          }
-        }
-      }
-    }
+    responses: responses,
+    schemas: schemas
   }
 }
 
