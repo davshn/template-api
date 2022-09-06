@@ -11,6 +11,7 @@ module.exports = (sequelize: Sequelize) => {
     email!: string
     phone!: string
     password!: string
+    profileAvatar!: string
     deviceInfo!: deviceTokens
     role!: userRoles
     isBanned!: boolean
@@ -53,6 +54,10 @@ module.exports = (sequelize: Sequelize) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    profileAvatar: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     deviceInfo: {
       type: DataTypes.JSON,

@@ -20,6 +20,7 @@ export interface UserAttributes {
   email: string
   phone: string
   password: string
+  profileAvatar: string
   deviceInfo: deviceTokens
   role: userRoles
   isBanned: boolean

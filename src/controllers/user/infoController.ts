@@ -1,7 +1,7 @@
 import { Request } from 'express'
-import { decodedToken } from '../../types/types'
 
 import { models } from '../../models'
+import { decodedToken } from '../../types/types'
 
 const infoController = async (req: Request): Promise<any> => {
   const userInfo = req.user as decodedToken
