@@ -3,7 +3,7 @@ import { Router, Request, Response } from 'express'
 import { bruteLimiter } from '../config/rateLimiter'
 import Logger from '../config/logger/winston'
 
-import { validateLogin, validateVersion, validateRegister, validateRefresh, validateLogout, validateToken } from '../middlewares/validations/authentication'
+import { validateLogin, validateVersion, validateRegister, validateRefresh, validateLogout, validateToken, validateVerify } from '../middlewares/validations/authentication'
 import versionProtection from '../middlewares/authentication/verifyVersion'
 import { verifyRefresh, verifyAuthentication } from '../middlewares/authentication/verifyTokens'
 import authentication from '../controllers/authentication'
@@ -174,4 +174,45 @@ router.post('/logout', validateVersion, validateLogout, validateToken, versionPr
  *        '426':
  *          $ref: "#/components/responses/426"
  */
+
+router.put('/verify/:verifyToken/:email', validateVerify, async (req: Request, res: Response) => {
+  try {
+    await authentication.verifyController(req)
+    res.status(201).send('Usuario verificado con exito')
+  } catch (error) {
+    Logger.error(error)
+    res.status(400).send('Error al verificar')
+  }
+})
+/**
+ * Post track
+ * @openapi
+ * /authentication/verify/{verifyToken}/{email}:
+ *    put:
+ *      tags:
+ *        - Authentication
+ *      summary: "User verify"
+ *      description: Verify user
+ *      parameters:
+ *       - in: path
+ *         name: verifyToken
+ *         schema:
+ *         type: string
+ *         required: true
+ *       - in: path
+ *         name: email
+ *         schema:
+ *         type: string
+ *         required: true
+ *      responses:
+ *        '201':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '401':
+ *          $ref: "#/components/responses/401"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ */
+
 export default router

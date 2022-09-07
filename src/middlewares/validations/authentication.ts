@@ -1,4 +1,4 @@
-import { body, header } from 'express-validator'
+import { body, header, param } from 'express-validator'
 import { Request, Response, NextFunction } from 'express'
 
 import validateResults from './validateResults'
@@ -104,6 +104,21 @@ export const validateLogout = [
     .isString()
     .isLength({ min: 5 })
     .escape(),
+  (req: Request, res: Response, next: NextFunction) => {
+    validateResults(req, res, next)
+  }
+]
+
+export const validateVerify = [
+  param('verifyToken', 'Token no valido')
+    .exists()
+    .isString()
+    .isLength({ min: 15 })
+    .escape(),
+  param('email', 'Email incorrecto')
+    .exists()
+    .isEmail()
+    .normalizeEmail(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
   }
