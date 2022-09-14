@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
+    "gcp-build": "tsc -p .",
     "dev": "ts-node-dev src/index.ts",
-    "start": "node build/index.js",
+    "start": "node ./dist/index.js",
     "test": "jest --verbose --watch --colors --detectOpenHandles --silent"
   },
   "repository": {

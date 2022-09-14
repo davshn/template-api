@@ -1,0 +1,18 @@
+runtime: nodejs16
+
+instance_class: F2
+
+env_variables:
+  DATABASE_URL: "postgres://qobahjkdxvkzip:009538e9b4fb532e6b0ce99b7e9ec7cc8c24ead0c56bbb430f7e5bfc0d09a3d3@ec2-44-206-197-71.compute-1.amazonaws.com:5432/dfa8sk8akd4vlu"
+  VERSION: "1.0.0"
+  TOKEN_KEY: "GenAppToken123"
+  TOKEN_REF_KEY: "RefAppToken123"
+  NODE_ENV: "production"
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /.*
+  secure: always
+  script: auto
