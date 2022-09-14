@@ -41,6 +41,7 @@
     "typescript": "^4.8.2"
   },
   "dependencies": {
+    "@google-cloud/logging-winston": "^5.1.5",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
