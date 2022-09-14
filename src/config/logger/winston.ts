@@ -42,9 +42,9 @@ const transportsDev = [
   new winston.transports.File({ filename: 'logs/all.log' })
 ]
 
-const transportsGoogle = [
-  new winston.transports.Console(),
-  loggingWinston
+const transportsGoogle: [] = [
+  /* new winston.transports.Console(),
+  loggingWinston */
 ]
 
 const transports = ENV === 'develop' ? transportsDev : transportsGoogle
