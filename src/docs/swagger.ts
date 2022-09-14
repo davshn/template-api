@@ -11,7 +11,7 @@ const swaggerDefinition: OAS3Definition = {
   },
   servers: [
     {
-      url: 'https://adoptapi.herokuapp.com'
+      url: 'https://backtemplate.rj.r.appspot.com'
     },
     {
       url: 'http://localhost:4000'
