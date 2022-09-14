@@ -48,7 +48,7 @@ const transportsGoogle = [
 ]
 
 const transports = ENV === 'develop' ? transportsDev : transportsGoogle
-
+console.log(ENV)
 const Logger = winston.createLogger({
   level: 'info',
   levels,
