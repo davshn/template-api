@@ -5,8 +5,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 const loggingWinston = new LoggingWinston()
-const NODE_ENV = process.env.NODE_ENV
-console.debug('🚀 ~ file: winston.ts ~ line 9 ~ NODE_ENV', NODE_ENV)
+const NODE_ENV = process.env.NODE_ENV as string
 
 const levels = {
   error: 0,
@@ -34,8 +33,8 @@ const format = winston.format.combine(
   )
 )
 
-const selectTransport = (): TransportStream[] => {
-  if (NODE_ENV === 'Dev') {
+const selectTransport = (environment: string): TransportStream[] => {
+  if (environment === 'Dev') {
     return [
       new winston.transports.Console(),
       new winston.transports.File({
@@ -52,7 +51,7 @@ const selectTransport = (): TransportStream[] => {
   ]
 }
 
-const transports = selectTransport()
+const transports = selectTransport(NODE_ENV)
 
 const Logger = winston.createLogger({
   level: 'info',
