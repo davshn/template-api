@@ -1,10 +1,6 @@
 import winston from 'winston'
 import { LoggingWinston } from '@google-cloud/logging-winston'
-import dotenv from 'dotenv'
 
-dotenv.config()
-
-const ENV = process.env.NODE_ENV as string
 const loggingWinston = new LoggingWinston()
 
 const levels = {
@@ -33,7 +29,7 @@ const format = winston.format.combine(
   )
 )
 
-const transportsDev = [
+/* const transportsDev = [
   new winston.transports.Console(),
   new winston.transports.File({
     filename: 'logs/error.log',
@@ -41,14 +37,13 @@ const transportsDev = [
   }),
   new winston.transports.File({ filename: 'logs/all.log' })
 ]
+*/
 
-const transportsGoogle: [] = [
-  /* new winston.transports.Console(),
-  loggingWinston */
+const transports = [
+  new winston.transports.Console(),
+  loggingWinston
 ]
 
-const transports = ENV === 'develop' ? transportsDev : transportsGoogle
-console.log(ENV)
 const Logger = winston.createLogger({
   level: 'info',
   levels,
