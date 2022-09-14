@@ -8,11 +8,3 @@ env_variables:
   TOKEN_KEY: "GenAppToken123"
   TOKEN_REF_KEY: "RefAppToken123"
   NODE_ENV: "production"
-
-handlers:
-- url: /stylesheets
-  static_dir: stylesheets
-
-- url: /.*
-  secure: always
-  script: auto
