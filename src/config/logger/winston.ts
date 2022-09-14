@@ -1,7 +1,12 @@
 import winston from 'winston'
 import { LoggingWinston } from '@google-cloud/logging-winston'
+import TransportStream from 'winston-transport'
+import dotenv from 'dotenv'
 
+dotenv.config()
 const loggingWinston = new LoggingWinston()
+const NODE_ENV = process.env.NODE_ENV
+console.debug('🚀 ~ file: winston.ts ~ line 9 ~ NODE_ENV', NODE_ENV)
 
 const levels = {
   error: 0,
@@ -29,20 +34,25 @@ const format = winston.format.combine(
   )
 )
 
-/* const transportsDev = [
-  new winston.transports.Console(),
-  new winston.transports.File({
-    filename: 'logs/error.log',
-    level: 'error'
-  }),
-  new winston.transports.File({ filename: 'logs/all.log' })
-]
-*/
+const selectTransport = (): TransportStream[] => {
+  if (NODE_ENV === 'Dev') {
+    return [
+      new winston.transports.Console(),
+      new winston.transports.File({
+        filename: 'logs/error.log',
+        level: 'error'
+      }),
+      new winston.transports.File({ filename: 'logs/all.log' })
+    ]
+  }
 
-const transports = [
-  new winston.transports.Console(),
-  loggingWinston
-]
+  return [
+    new winston.transports.Console(),
+    loggingWinston
+  ]
+}
+
+const transports = selectTransport()
 
 const Logger = winston.createLogger({
   level: 'info',
