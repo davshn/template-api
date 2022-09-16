@@ -8,6 +8,9 @@ export const responses = {
   401: {
     description: 'Invalid User.'
   },
+  403: {
+    description: 'Invalid Role.'
+  },
   422: {
     description: 'Validation error.'
   },
