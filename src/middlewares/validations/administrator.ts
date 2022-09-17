@@ -3,15 +3,15 @@ import { Request, Response, NextFunction } from 'express'
 
 import validateResults from './validateResults'
 
-export const validateChangeRole = [
+export const validateBanUser = [
   body('userId', 'Id no valido')
     .exists()
     .isString()
     .isLength({ min: 15 })
     .escape(),
-  body('role', 'Rol no valido')
+  body('ban', 'Condicion no valida')
     .exists()
-    .isIn(['USER', 'ADMIN', 'ROOT']),
+    .isBoolean(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
   }

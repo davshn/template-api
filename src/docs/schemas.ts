@@ -96,12 +96,12 @@ export const schemas = {
   },
   banUser: {
     type: 'object',
-    required: ['userId', 'isBanned'],
+    required: ['userId', 'ban'],
     properties: {
       userId: {
         type: 'string'
       },
-      isBanned: {
+      ban: {
         type: 'boolean'
       }
     }
