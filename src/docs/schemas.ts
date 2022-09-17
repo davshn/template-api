@@ -105,5 +105,18 @@ export const schemas = {
         type: 'boolean'
       }
     }
+  },
+  orderQuery: {
+    type: 'object',
+    required: [],
+    properties: {
+      orderBy: {
+        type: 'string'
+      },
+      orderDirection: {
+        type: 'string',
+        enum: ['ASC', 'DESC']
+      }
+    }
   }
 }
