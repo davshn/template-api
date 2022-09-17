@@ -80,5 +80,18 @@ export const schemas = {
         type: 'string'
       }
     }
+  },
+  changeRole: {
+    type: 'object',
+    required: ['userId', 'role'],
+    properties: {
+      userId: {
+        type: 'string'
+      },
+      role: {
+        type: 'string',
+        enum: ['USER', 'ADMIN', 'ROOT']
+      }
+    }
   }
 }

@@ -2,13 +2,15 @@ import { Router, Request, Response } from 'express'
 
 import Logger from '../config/logger/winston'
 
+import root from '../controllers/root'
 import { validateToken } from '../middlewares/validations/authentication'
 import { verifyRootRole } from '../middlewares/authentication/verifyRole'
 
 const router = Router()
 
-router.post('/changeRole', validateToken, verifyRootRole, async (_req: Request, res: Response) => {
+router.post('/changeRole', validateToken, verifyRootRole, async (req: Request, res: Response) => {
   try {
+    await root.changeRoleController(req)
     res.status(200).json('Exito')
   } catch (error) {
     Logger.error(error)
@@ -24,6 +26,11 @@ router.post('/changeRole', validateToken, verifyRootRole, async (_req: Request, 
  *        - Root
  *      summary: "Change user role"
  *      description: Change user role
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/changeRole"
  *      security:
  *        - bearerAuth: []
  *      responses:
