@@ -49,13 +49,13 @@ export const validateRegister = [
   body('name', 'Nombre no valido')
     .exists()
     .isString()
-    .isLength({ min: 3, max: 12 })
+    .isLength({ min: 3, max: 20 })
     .trim()
     .escape(),
   body('lastname', 'Apellido no valido')
     .exists()
     .isString()
-    .isLength({ min: 3, max: 12 })
+    .isLength({ min: 3, max: 20 })
     .trim()
     .escape(),
   body('documentNumber', 'Numero de documento no valido')

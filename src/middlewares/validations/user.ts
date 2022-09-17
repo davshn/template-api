@@ -7,13 +7,13 @@ export const validateUserEdit = [
   body('name', 'Nombre no valido')
     .if((_value: any, { req }: {req: any}) => req.body.name)
     .isString()
-    .isLength({ min: 3, max: 12 })
+    .isLength({ min: 3, max: 20 })
     .trim()
     .escape(),
   body('lastname', 'Apellido no valido')
     .if((_value: any, { req }: {req: any}) => req.body.lastname)
     .isString()
-    .isLength({ min: 3, max: 12 })
+    .isLength({ min: 3, max: 20 })
     .trim()
     .escape(),
   body('phone', 'Telefono no valido')
