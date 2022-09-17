@@ -12,7 +12,7 @@ router.post('/changeRole', validateToken, verifyRootRole, async (_req: Request, 
     res.status(200).json('Exito')
   } catch (error) {
     Logger.error(error)
-    res.status(400).send('Error al obtener datos de usuario')
+    res.status(400).send('Error al cambiar rol de usuario')
   }
 })
 /**

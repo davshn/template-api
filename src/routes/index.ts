@@ -9,11 +9,10 @@ const router = Router({ strict: true })
 const basename = path.basename(__filename)
 
 fs.readdirSync(path.join(__dirname, './'))
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  .filter((file: string) => file.indexOf('.') !== 0 && file !== basename).forEach(async (file) => {
+  .filter((file: string) => file.indexOf('.') !== 0 && file !== basename).forEach((async (file: string) => {
     const route = await import(path.join(__dirname, './', file))
     router.use(`/${file.slice(0, -3)}`, route.default)
-  })
+  }) as any)
 
 // Documentation
 router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup))

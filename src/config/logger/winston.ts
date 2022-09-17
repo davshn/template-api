@@ -1,9 +1,7 @@
 import winston from 'winston'
 import { LoggingWinston } from '@google-cloud/logging-winston'
 import TransportStream from 'winston-transport'
-import dotenv from 'dotenv'
 
-dotenv.config()
 const loggingWinston = new LoggingWinston()
 const NODE_ENV = process.env.NODE_ENV as string
 
@@ -34,7 +32,7 @@ const format = winston.format.combine(
 )
 
 const selectTransport = (environment: string): TransportStream[] => {
-  if (environment === 'Dev') {
+  if (environment === 'Dev' || environment === 'test') {
     return [
       new winston.transports.Console(),
       new winston.transports.File({

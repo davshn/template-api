@@ -8,7 +8,7 @@
     "gcp-build": "tsc",
     "dev": "ts-node-dev src/index.ts",
     "start": "node build/index.js",
-    "test": "jest --verbose --watch --colors --detectOpenHandles --silent"
+    "test": "jest --verbose --watch --colors --detectOpenHandles"
   },
   "repository": {
     "type": "git",
