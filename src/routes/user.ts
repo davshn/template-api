@@ -9,7 +9,6 @@ import { validateUserEdit } from '../middlewares/validations/user'
 
 const router = Router()
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.get('/info', validateToken, verifyAuthentication, async (req: Request, res: Response) => {
   try {
     const userInfo = await user.infoController(req)
