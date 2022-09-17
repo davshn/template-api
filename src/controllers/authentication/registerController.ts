@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt'
 
 import { models } from '../../models'
 
-const registerController = async (req: Request): Promise<any> => {
+const registerController = async (req: Request): Promise<void> => {
   const salt = await bcrypt.genSalt(10)
-  console.log(models)
+
   await models.User.create({
     name: req.body.name,
     lastname: req.body.lastname,

@@ -3,7 +3,7 @@ import { decodedToken } from '../../types/types'
 import { userModel } from '../../types/auth'
 import { models } from '../../models'
 
-const logoutController = async (req: Request): Promise<any> => {
+const logoutController = async (req: Request): Promise<void> => {
   const deviceInfo = req.body.deviceInfo
   const userInfo = req.user as decodedToken
 

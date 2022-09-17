@@ -2,8 +2,9 @@ import { Request } from 'express'
 
 import { models } from '../../models'
 import { decodedToken } from '../../types/types'
+import { userModel } from '../../types/auth'
 
-const infoController = async (req: Request): Promise<any> => {
+const infoController = async (req: Request): Promise<userModel> => {
   const userInfo = req.user as decodedToken
   const user = await models.User.findOne({
     attributes: [
@@ -16,7 +17,7 @@ const infoController = async (req: Request): Promise<any> => {
       'role'
     ],
     where: { id: userInfo.id }
-  })
+  }) as userModel
   return user
 }
 

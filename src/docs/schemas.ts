@@ -93,5 +93,17 @@ export const schemas = {
         enum: ['USER', 'ADMIN', 'ROOT']
       }
     }
+  },
+  banUser: {
+    type: 'object',
+    required: ['userId', 'isBanned'],
+    properties: {
+      userId: {
+        type: 'string'
+      },
+      isBanned: {
+        type: 'boolean'
+      }
+    }
   }
 }

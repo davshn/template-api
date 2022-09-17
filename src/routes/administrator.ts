@@ -2,36 +2,33 @@ import { Router, Request, Response } from 'express'
 
 import Logger from '../config/logger/winston'
 
-import root from '../controllers/root'
 import { validateToken } from '../middlewares/validations/authentication'
-import { verifyRootRole } from '../middlewares/authentication/verifyRole'
-import { validateRootChangeRole } from '../middlewares/validations/root'
+import { verifyAdminRole } from '../middlewares/authentication/verifyRole'
 
 const router = Router()
 
-router.patch('/changeRole', validateToken, validateRootChangeRole, verifyRootRole, async (req: Request, res: Response) => {
+router.patch('/banUser', validateToken, verifyAdminRole, async (_req: Request, res: Response) => {
   try {
-    await root.changeRoleController(req)
-    res.status(201).json('Rol cambiado con exito')
+    res.status(201).json('Ban de usuario cambiado con exito')
   } catch (error) {
     Logger.error(error)
-    res.status(400).send('Error al cambiar rol de usuario')
+    res.status(400).send('Error al modificar usuario')
   }
 })
 /**
  * Post track
  * @openapi
- * /root/changeRole:
+ * /administrator/banUser:
  *    patch:
  *      tags:
- *        - Root
- *      summary: "Change user role"
- *      description: Change user role
+ *        - Administrator
+ *      summary: "Ban / Unban user"
+ *      description: Ban / Unban user
  *      requestBody:
  *          content:
  *            application/json:
  *              schema:
- *                $ref: "#/components/schemas/changeRole"
+ *                $ref: "#/components/schemas/banUser"
  *      security:
  *        - bearerAuth: []
  *      responses:
