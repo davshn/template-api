@@ -9,7 +9,7 @@ import { validateRootChangeRole } from '../middlewares/validations/root'
 
 const router = Router()
 
-router.post('/changeRole', validateToken, validateRootChangeRole, verifyRootRole, async (req: Request, res: Response) => {
+router.patch('/changeRole', validateToken, validateRootChangeRole, verifyRootRole, async (req: Request, res: Response) => {
   try {
     await root.changeRoleController(req)
     res.status(200).json('Rol cambiado con exito')
@@ -22,7 +22,7 @@ router.post('/changeRole', validateToken, validateRootChangeRole, verifyRootRole
  * Post track
  * @openapi
  * /root/changeRole:
- *    post:
+ *    patch:
  *      tags:
  *        - Root
  *      summary: "Change user role"

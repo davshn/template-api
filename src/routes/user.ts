@@ -40,7 +40,7 @@ router.get('/info', validateToken, verifyAuthentication, async (req: Request, re
  *          $ref: "#/components/responses/422"
  */
 
-router.patch('/edit', validateToken, validateUserEdit, verifyAuthentication, async (req: Request, res: Response) => {
+router.put('/edit', validateToken, validateUserEdit, verifyAuthentication, async (req: Request, res: Response) => {
   try {
     await user.editController(req)
     res.status(201).send('Edicion de usuario exitosa')
@@ -53,7 +53,7 @@ router.patch('/edit', validateToken, validateUserEdit, verifyAuthentication, asy
  * Post track
  * @openapi
  * /user/edit:
- *    patch:
+ *    put:
  *      tags:
  *        - User
  *      summary: "User edit"

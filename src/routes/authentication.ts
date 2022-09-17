@@ -175,7 +175,7 @@ router.post('/logout', validateVersion, validateLogout, validateToken, versionPr
  *          $ref: "#/components/responses/426"
  */
 
-router.put('/verify/:verifyToken/:email', validateVerify, async (req: Request, res: Response) => {
+router.patch('/verify/:verifyToken/:email', validateVerify, async (req: Request, res: Response) => {
   try {
     await authentication.verifyController(req)
     res.status(201).send('Usuario verificado con exito')
@@ -188,7 +188,7 @@ router.put('/verify/:verifyToken/:email', validateVerify, async (req: Request, r
  * Post track
  * @openapi
  * /authentication/verify/{verifyToken}/{email}:
- *    put:
+ *    patch:
  *      tags:
  *        - Authentication
  *      summary: "User verify"
