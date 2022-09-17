@@ -5,13 +5,14 @@ import Logger from '../config/logger/winston'
 import root from '../controllers/root'
 import { validateToken } from '../middlewares/validations/authentication'
 import { verifyRootRole } from '../middlewares/authentication/verifyRole'
+import { validateRootChangeRole } from '../middlewares/validations/root'
 
 const router = Router()
 
-router.post('/changeRole', validateToken, verifyRootRole, async (req: Request, res: Response) => {
+router.post('/changeRole', validateToken, validateRootChangeRole, verifyRootRole, async (req: Request, res: Response) => {
   try {
     await root.changeRoleController(req)
-    res.status(200).json('Exito')
+    res.status(200).json('Rol cambiado con exito')
   } catch (error) {
     Logger.error(error)
     res.status(400).send('Error al cambiar rol de usuario')
