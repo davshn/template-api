@@ -17,7 +17,7 @@ server.use(helmet())
 server.use(express.urlencoded({ extended: true, limit: '100kb' }))
 server.use(express.json({ limit: '100kb' }))
 server.use(morganMiddleware)
-server.use(favicon(path.join(__dirname, './utils/assets/Server.png')))
+server.use(favicon(path.join(__dirname, '../assets/Server.png')))
 server.use(rateLimiter)
 server.use(cors(corsConfig))
 
