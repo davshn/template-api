@@ -82,16 +82,26 @@ router.get('/listUsers', validateToken, verifyAdminRole, async (req: Request, re
  *          name: orderBy
  *          schema:
  *          type: string
- *          enum: ['name', 'lastname', 'documentType', 'documentNumber', 'email', 'phone', 'profileAvatar', 'role', 'isBanned', 'isVerified']
  *          required: false
  *          description: Column name for order
  *        - in: query
  *          name: orderDirection
  *          schema:
  *          type: string
- *          enum: ['ASC', 'DESC']
  *          required: false
  *          description: Order direction
+ *        - in: query
+ *          name: searchByName
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by name
+ *        - in: query
+ *          name: searchByLastname
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by lastname
  *      security:
  *        - bearerAuth: []
  *      responses:
