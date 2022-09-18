@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express'
 
 import Logger from '../config/logger/winston'
 
-import administrator from '../controllers/administrator'
+import administratorController from '../controllers/administratorController'
 import { validateToken } from '../middlewares/validations/authentication'
 import { verifyAdminRole } from '../middlewares/authentication/verifyRole'
 import { validateBanUser } from '../middlewares/validations/administrator'
@@ -11,7 +11,7 @@ const router = Router()
 
 router.patch('/banUser', validateToken, validateBanUser, verifyAdminRole, async (req: Request, res: Response) => {
   try {
-    await administrator.banUserController(req)
+    await administratorController.banUser(req)
     res.status(201).json('Usuario modificado con exito')
   } catch (error) {
     Logger.error(error)
@@ -49,7 +49,7 @@ router.patch('/banUser', validateToken, validateBanUser, verifyAdminRole, async 
 
 router.get('/listUsers', validateToken, verifyAdminRole, async (req: Request, res: Response) => {
   try {
-    const users = await administrator.listUsersController(req)
+    const users = await administratorController.listUsers(req)
     res.status(200).json(users)
   } catch (error) {
     Logger.error(error)

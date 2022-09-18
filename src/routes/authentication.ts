@@ -6,12 +6,12 @@ import Logger from '../config/logger/winston'
 import { validateLogin, validateVersion, validateRegister, validateRefresh, validateLogout, validateToken, validateVerify } from '../middlewares/validations/authentication'
 import versionProtection from '../middlewares/authentication/verifyVersion'
 import { verifyRefresh, verifyAuthentication } from '../middlewares/authentication/verifyTokens'
-import authentication from '../controllers/authentication'
+import authenticationController from '../controllers/authenticationController'
 
 const router = Router()
 router.post('/register', validateVersion, validateRegister, versionProtection, async (req: Request, res: Response) => {
   try {
-    await authentication.registerController(req)
+    await authenticationController.register(req)
     res.status(201).send('Usuario registrado con exito')
   } catch (error) {
     Logger.error(error)
@@ -51,7 +51,7 @@ router.post('/register', validateVersion, validateRegister, versionProtection, a
 
 router.post('/login', bruteLimiter, validateVersion, validateLogin, versionProtection, async (req: Request, res: Response) => {
   try {
-    const loggedUser = await authentication.loginController(req)
+    const loggedUser = await authenticationController.login(req)
     res.status(200).json(loggedUser)
   } catch (error: any) {
     const email = req.body.email as string
@@ -92,7 +92,7 @@ router.post('/login', bruteLimiter, validateVersion, validateLogin, versionProte
 
 router.post('/refresh', validateVersion, validateRefresh, versionProtection, verifyRefresh, async (req: Request, res: Response) => {
   try {
-    const loggedUser = await authentication.refreshController(req)
+    const loggedUser = await authenticationController.refresh(req)
     res.status(200).json(loggedUser)
   } catch (error: any) {
     const ip = req.headers['x-forwarded-for'] as string ?? req.socket.remoteAddress
@@ -134,7 +134,7 @@ router.post('/refresh', validateVersion, validateRefresh, versionProtection, ver
 
 router.post('/logout', validateVersion, validateLogout, validateToken, versionProtection, verifyAuthentication, async (req: Request, res: Response) => {
   try {
-    await authentication.logoutController(req)
+    await authenticationController.logout(req)
     res.status(200).send('Usuario desconectado con exito')
   } catch (error: any) {
     res.status(400).json(error.message)
@@ -177,7 +177,7 @@ router.post('/logout', validateVersion, validateLogout, validateToken, versionPr
 
 router.get('/verify/:verifyToken/:email', validateVerify, async (req: Request, res: Response) => {
   try {
-    await authentication.verifyController(req)
+    await authenticationController.verify(req)
     res.status(201).send('Usuario verificado con exito')
   } catch (error) {
     Logger.error(error)

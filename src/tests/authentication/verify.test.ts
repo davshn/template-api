@@ -12,19 +12,19 @@ describe('User should verify if correct token is send', () => {
 
   test('It should respond 400 on incorrect user', async () => {
     const user = await models.User.findOne({ where: { email: 'test@test.com' } }) as userModel
-    const response = await request(server).put('/authentication/verify/' + user.id + '/' + 'test@tet.com')
+    const response = await request(server).get('/authentication/verify/' + user.id + '/' + 'test@tet.com')
     expect(response.statusCode).toBe(400)
   })
 
   test('It should respond 400 on incorrect token', async () => {
     const user = await models.User.findOne({ where: { email: 'test@test.com' } }) as userModel
-    const response = await request(server).put('/authentication/verify/' + 'asdasdasdasdasdasdasd' + '/' + user.email)
+    const response = await request(server).get('/authentication/verify/' + 'asdasdasdasdasdasdasd' + '/' + user.email)
     expect(response.statusCode).toBe(400)
   })
 
   test('It should verify user on correct token', async () => {
     const user = await models.User.findOne({ where: { email: 'test@test.com' } }) as userModel
-    const response = await request(server).put('/authentication/verify/' + user.id + '/' + user.email)
+    const response = await request(server).get('/authentication/verify/' + user.id + '/' + user.email)
     expect(response.statusCode).toBe(201)
   })
 

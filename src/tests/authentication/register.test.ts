@@ -18,10 +18,6 @@ describe('Register should create users correctly avoiding bad info', () => {
     phone: '1111111111'
   }
 
-  beforeAll(async () => {
-    await destroyTestUser()
-  })
-
   test('It should respond with a 422 status on bad info', async () => {
     const response = await request(server).post('/authentication/register').set('Version', VERSION as string).send({})
     expect(response.statusCode).toBe(422)

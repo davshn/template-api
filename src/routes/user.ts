@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express'
 
 import Logger from '../config/logger/winston'
 
-import user from '../controllers/user'
+import userController from '../controllers/userController'
 import { validateToken } from '../middlewares/validations/authentication'
 import { verifyAuthentication } from '../middlewares/authentication/verifyTokens'
 import { validateUserEdit } from '../middlewares/validations/user'
@@ -11,7 +11,7 @@ const router = Router()
 
 router.get('/info', validateToken, verifyAuthentication, async (req: Request, res: Response) => {
   try {
-    const userInfo = await user.infoController(req)
+    const userInfo = await userController.info(req)
     res.status(200).json(userInfo)
   } catch (error) {
     Logger.error(error)
@@ -42,7 +42,7 @@ router.get('/info', validateToken, verifyAuthentication, async (req: Request, re
 
 router.put('/edit', validateToken, validateUserEdit, verifyAuthentication, async (req: Request, res: Response) => {
   try {
-    await user.editController(req)
+    await userController.edit(req)
     res.status(201).send('Edicion de usuario exitosa')
   } catch (error) {
     Logger.error(error)

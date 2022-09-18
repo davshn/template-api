@@ -25,7 +25,7 @@ describe('User could change own info', () => {
   })
 
   test('It should change its own password', async () => {
-    const response = await request(server).patch('/user/edit').set('Authorization', 'Bearer ' + userToken.token).send(newPassword)
+    const response = await request(server).put('/user/edit').set('Authorization', 'Bearer ' + userToken.token).send(newPassword)
     const userEdited = await models.User.findOne({ where: { email: 'test@test.com' } }) as userModel
     const verifyPass = await bcrypt.compare('Edited123*', userEdited.password)
     expect(verifyPass).toBe(true)
@@ -33,7 +33,7 @@ describe('User could change own info', () => {
   })
 
   test('It should change its own info', async () => {
-    const response = await request(server).patch('/user/edit').set('Authorization', 'Bearer ' + userToken.token).send(newUser)
+    const response = await request(server).put('/user/edit').set('Authorization', 'Bearer ' + userToken.token).send(newUser)
     const userEdited = await models.User.findOne({ where: { email: 'test@test.com' } }) as userModel
     expect(userEdited.name).toBe('Edited')
     expect(userEdited.lastname).toBe('Edited')
