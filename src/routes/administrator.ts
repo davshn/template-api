@@ -90,6 +90,12 @@ router.get('/listUsers', validateToken, verifyAdminRole, async (req: Request, re
  *          type: string
  *          required: false
  *          description: Order direction
+  *        - in: query
+ *          name: searchById
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by id
  *        - in: query
  *          name: searchByName
  *          schema:
@@ -102,6 +108,42 @@ router.get('/listUsers', validateToken, verifyAdminRole, async (req: Request, re
  *          type: string
  *          required: false
  *          description: Search by lastname
+ *        - in: query
+ *          name: searchByDocumentNumber
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by document number
+ *        - in: query
+ *          name: searchByEmail
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by email
+ *        - in: query
+ *          name: searchByPhone
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by phone
+ *        - in: query
+ *          name: searchByRole
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by role
+ *        - in: query
+ *          name: searchByIsBanned
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by is banned
+ *        - in: query
+ *          name: searchByIsVerified
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by is verified
  *      security:
  *        - bearerAuth: []
  *      responses:
