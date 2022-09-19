@@ -8,6 +8,7 @@ export const validateVersion = [
     .exists()
     .isString()
     .isLength({ min: 5 })
+    .trim()
     .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
@@ -19,6 +20,7 @@ export const validateToken = [
     .exists()
     .isString()
     .isLength({ min: 10 })
+    .trim()
     .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
@@ -34,11 +36,13 @@ export const validateLogin = [
     .exists()
     .isString()
     .isStrongPassword()
+    .trim()
     .escape(),
   body('deviceInfo', 'La informacion del dispositivo es requerida')
     .exists()
     .isString()
     .isLength({ min: 5 })
+    .trim()
     .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
@@ -65,7 +69,7 @@ export const validateRegister = [
   body('documentType', 'Tipo de documento no valido')
     .exists()
     .isIn(['CC', 'NI', 'CE']),
-  body('email', 'Email incorrecto')
+  body('email', 'Email no valido')
     .exists()
     .isEmail()
     .normalizeEmail(),
@@ -73,6 +77,7 @@ export const validateRegister = [
     .exists()
     .isString()
     .isStrongPassword()
+    .trim()
     .escape(),
   body('phone', 'Telefono no valido')
     .exists()
@@ -87,11 +92,13 @@ export const validateRefresh = [
     .exists()
     .isString()
     .isLength({ min: 10 })
+    .trim()
     .escape(),
   body('deviceInfo', 'La informacion del dispositivo es requerida')
     .exists()
     .isString()
     .isLength({ min: 5 })
+    .trim()
     .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
@@ -103,6 +110,7 @@ export const validateLogout = [
     .exists()
     .isString()
     .isLength({ min: 5 })
+    .trim()
     .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
@@ -114,6 +122,7 @@ export const validateVerify = [
     .exists()
     .isString()
     .isLength({ min: 15 })
+    .trim()
     .escape(),
   param('email', 'Email incorrecto')
     .exists()

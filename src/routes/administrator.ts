@@ -5,7 +5,8 @@ import Logger from '../config/logger/winston'
 import administratorController from '../controllers/administratorController'
 import { validateToken } from '../middlewares/validations/authentication'
 import { verifyAdminRole } from '../middlewares/authentication/verifyRole'
-import { validateBanUser } from '../middlewares/validations/administrator'
+import { validateBanUser, validateSort, validateSearch } from '../middlewares/validations/administrator'
+import { validatePagination } from '../middlewares/validations/validateGeneric'
 
 const router = Router()
 
@@ -19,7 +20,7 @@ router.patch('/banUser', validateToken, validateBanUser, verifyAdminRole, async 
   }
 })
 
-router.get('/listUsers', validateToken, verifyAdminRole, async (req: Request, res: Response) => {
+router.get('/listUsers', validateToken, validatePagination, validateSort, validateSearch, verifyAdminRole, async (req: Request, res: Response) => {
   try {
     const users = await administratorController.listUsers(req)
     res.status(200).json(users)

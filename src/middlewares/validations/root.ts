@@ -8,9 +8,11 @@ export const validateChangeRole = [
     .exists()
     .isString()
     .isLength({ min: 15 })
+    .trim()
     .escape(),
   body('role', 'Rol no valido')
     .exists()
+    .trim()
     .isIn(['USER', 'ADMIN', 'ROOT']),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)

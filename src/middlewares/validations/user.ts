@@ -23,6 +23,7 @@ export const validateUserEdit = [
     .if((_value: any, { req }: {req: any}) => req.body.password)
     .isString()
     .isStrongPassword()
+    .trim()
     .escape(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResults(req, res, next)
