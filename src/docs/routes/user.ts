@@ -47,3 +47,25 @@
  *        '422':
  *          $ref: "#/components/responses/422"
  */
+
+/**
+ * Post track
+ * @openapi
+ * /user/delete:
+ *    delete:
+ *      tags:
+ *        - User
+ *      summary: "User delete"
+ *      description: Get user delete
+ *      security:
+ *        - bearerAuth: []
+ *      responses:
+ *        '201':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '401':
+ *          $ref: "#/components/responses/401"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ */
