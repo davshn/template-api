@@ -35,3 +35,9 @@ export interface PostAttributes {
   detail: string
   image: string
 }
+
+export interface CommentsAttributes {
+  id: string
+  name: string
+  text: string
+}

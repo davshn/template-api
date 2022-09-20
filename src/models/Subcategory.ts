@@ -11,6 +11,7 @@ module.exports = (sequelize: Sequelize) => {
 
     static associate (models: any): void {
       Subcategory.belongsTo(models.Category)
+      Subcategory.hasMany(models.Post)
     }
   }
   Subcategory.init({

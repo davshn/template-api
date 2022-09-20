@@ -17,6 +17,14 @@ module.exports = (sequelize: Sequelize) => {
     role!: userRoles
     isBanned!: boolean
     isVerified!: boolean
+
+    static associate (models: any): void {
+      User.hasMany(models.Comment)
+      User.hasMany(models.Post)
+      User.belongsToMany(models.Post, {
+        through: 'PostFollowed'
+      })
+    }
   }
   User.init({
     id: {

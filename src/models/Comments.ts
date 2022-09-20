@@ -1,24 +1,19 @@
 import { Model, DataTypes, Sequelize } from 'sequelize'
 
-import { PostAttributes } from '../types/modelAttributes'
+import { CommentsAttributes } from '../types/modelAttributes'
 
 module.exports = (sequelize: Sequelize) => {
-  class Post extends Model<PostAttributes> implements PostAttributes {
+  class Comment extends Model<CommentsAttributes> implements CommentsAttributes {
     id!: string
     name!: string
-    detail!: string
-    image!: string
+    text!: string
 
     static associate (models: any): void {
-      Post.hasMany(models.Comment)
-      Post.belongsTo(models.User)
-      Post.belongsTo(models.Subcategory)
-      Post.belongsToMany(models.User, {
-        through: 'PostFollowed'
-      })
+      Comment.belongsTo(models.Post)
+      Comment.belongsTo(models.User)
     }
   }
-  Post.init({
+  Comment.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -29,18 +24,14 @@ module.exports = (sequelize: Sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    detail: {
+    text: {
       type: DataTypes.TEXT,
-      allowNull: true
-    },
-    image: {
-      type: DataTypes.STRING,
       allowNull: true
     }
   }, {
     sequelize,
-    modelName: 'Post',
+    modelName: 'Comment',
     timestamps: true
   })
-  return Post
+  return Comment
 }
