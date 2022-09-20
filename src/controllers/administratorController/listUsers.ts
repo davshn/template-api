@@ -28,8 +28,8 @@ const listUsersController = async (req: Request): Promise<pagingDataList> => {
   const { limit, offset } = getPagination(page as number, size as number)
 
   const users = await models.User.findAndCountAll({
-    limit: limit,
-    offset: offset,
+    limit,
+    offset,
     where: (where[Op.and].length !== 0) ? where : {},
     attributes: ['id', 'name', 'lastname', 'documentType', 'documentNumber', 'email', 'phone', 'profileAvatar', 'role', 'isBanned', 'isVerified'],
     order: [[orderBy as string, orderDirection as string]]

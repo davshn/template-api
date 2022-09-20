@@ -1,6 +1,6 @@
 import { Model, DataTypes, Sequelize } from 'sequelize'
 
-import { CategoryAttributes } from '../types/categories'
+import { CategoryAttributes } from '../types/modelAttributes'
 
 module.exports = (sequelize: Sequelize) => {
   class Category extends Model<CategoryAttributes> implements CategoryAttributes {

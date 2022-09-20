@@ -17,7 +17,7 @@ describe('Refresh should give a new token', () => {
     refToken = signRefreshToken('11111111111111', 'test@test.com')
     refreshInfo = {
       refreshToken: refToken,
-      deviceInfo: deviceInfo
+      deviceInfo
     }
   })
 

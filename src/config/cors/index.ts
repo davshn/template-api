@@ -10,7 +10,7 @@ const corsConfig = {
       callback(null, true)
     } else {
       Logger.error('CORS incorrecto ' + origin)
-      // eslint-disable-next-line node/no-callback-literal
+      // eslint-disable-next-line n/no-callback-literal
       callback('No permitido por CORS')
     }
   }

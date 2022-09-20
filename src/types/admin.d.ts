@@ -8,7 +8,7 @@ export interface dataList {
   rows: any[]
 }
 
-export interface pagingDataList{
+export interface pagingDataList {
   totalItems: number
   data: any[]
   totalPages: number

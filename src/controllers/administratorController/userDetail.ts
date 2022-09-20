@@ -10,7 +10,7 @@ const userDetailController = async (req: Request): Promise<userModel> => {
   const searchByEmail = req.query.searchByEmail as string
   const searchByPhone = req.query.searchByPhone as string
 
-  const where: {[key: string]: string} = { }
+  const where: { [key: string]: string } = { }
 
   if (searchById !== undefined) where.id = searchById
   if (searchByDocumentNumber !== undefined) where.documentNumber = searchByDocumentNumber
@@ -18,7 +18,7 @@ const userDetailController = async (req: Request): Promise<userModel> => {
   if (searchByPhone !== undefined) where.phone = searchByPhone
 
   const user = await models.User.findOne({
-    where: where,
+    where,
     attributes: ['id', 'name', 'lastname', 'documentType', 'documentNumber', 'email', 'phone', 'profileAvatar', 'role', 'isBanned', 'isVerified']
   }) as userModel
 

@@ -12,7 +12,7 @@ const changeRoleController = async (req: Request): Promise<void> => {
 
   if (user === null) throw new Error('Usuario no encontrado ')
 
-  user.set({ role: role })
+  user.set({ role })
   await user.save()
 }
 

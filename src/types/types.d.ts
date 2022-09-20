@@ -6,7 +6,7 @@ declare global {
   }
 }
 
-export interface decodedToken{
+export interface decodedToken {
   id: string
   email: string
 }

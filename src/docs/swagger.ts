@@ -24,8 +24,8 @@ const swaggerDefinition: OAS3Definition = {
         scheme: 'bearer'
       }
     },
-    responses: responses,
-    schemas: schemas
+    responses,
+    schemas
   }
 }
 

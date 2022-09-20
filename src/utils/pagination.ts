@@ -10,5 +10,5 @@ export const getPagingData = (data: dataList, page: number, limit: number): pagi
   const { count: totalItems, rows: result } = data
   const currentPage = page
   const totalPages = Math.ceil(totalItems / limit)
-  return { totalItems, data: result, totalPages, currentPage: currentPage }
+  return { totalItems, data: result, totalPages, currentPage }
 }

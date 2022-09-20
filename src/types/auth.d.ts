@@ -1,4 +1,5 @@
 import { Model } from 'sequelize/types'
+import { UserAttributes } from './modelAttributes'
 
 export enum documentTypes {
   CC = 'CC',
@@ -11,23 +12,7 @@ export enum userRoles {
   ADMIN = 'ADMIN',
   ROOT = 'ROOT'
 }
-export interface UserAttributes {
-  id: string
-  name: string
-  lastname: string
-  documentNumber: string
-  documentType: documentTypes
-  email: string
-  phone: string
-  password: string
-  profileAvatar: string
-  deviceInfo: deviceTokens
-  role: userRoles
-  isBanned: boolean
-  isVerified: boolean
-}
-
-export interface userModel extends Model<UserAttributes>, UserAttributes{}
+export interface userModel extends Model<UserAttributes>, UserAttributes {}
 
 export interface userToken {
   token: string

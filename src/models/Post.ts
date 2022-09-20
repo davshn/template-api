@@ -1,19 +1,15 @@
 import { Model, DataTypes, Sequelize } from 'sequelize'
 
-import { SubcategoryAttributes } from '../types/modelAttributes'
+import { PostAttributes } from '../types/modelAttributes'
 
 module.exports = (sequelize: Sequelize) => {
-  class Subcategory extends Model<SubcategoryAttributes> implements SubcategoryAttributes {
+  class Post extends Model<PostAttributes> implements PostAttributes {
     id!: string
     name!: string
     detail!: string
     image!: string
-
-    static associate (models: any): void {
-      Subcategory.belongsTo(models.Category)
-    }
   }
-  Subcategory.init({
+  Post.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -34,8 +30,8 @@ module.exports = (sequelize: Sequelize) => {
     }
   }, {
     sequelize,
-    modelName: 'Subcategory',
+    modelName: 'Post',
     timestamps: false
   })
-  return Subcategory
+  return Post
 }
