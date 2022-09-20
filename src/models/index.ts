@@ -17,8 +17,9 @@ const config = {
 const sequelize = new Sequelize(DATABASE_URL as string, config)
 
 fs.readdirSync(path.join(__dirname, './'))
-  .filter((file: string) => file !== 'asociations.ts' && file !== basename).forEach((async (file: string) => {
+  .filter((file: string) => file.indexOf('.') !== 0 && file !== basename).forEach((async (file: string) => {
     const model = require(path.join(__dirname, './', file))
+    console.log(model)
     model(sequelize)
   }) as any)
 
