@@ -10,7 +10,7 @@ const basename = path.basename(__filename)
 
 fs.readdirSync(path.join(__dirname, './'))
   .filter((file: string) => file.indexOf('.') !== 0 && file !== basename).forEach((async (file: string) => {
-    const route = await import(path.join(__dirname, './', file))
+    const route = require(path.join(__dirname, './', file))
     router.use(`/${file.slice(0, -3)}`, route.default)
   }) as any)
 

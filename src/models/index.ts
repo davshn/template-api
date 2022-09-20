@@ -17,11 +17,17 @@ const config = {
 const sequelize = new Sequelize(DATABASE_URL as string, config)
 
 fs.readdirSync(path.join(__dirname, './'))
-  .filter((file: string) => file.indexOf('.') !== 0 && file !== basename).forEach((async (file: string) => {
-    const model = await import(path.join(__dirname, './', file))
-    model.default(sequelize)
+  .filter((file: string) => file !== 'asociations.ts' && file !== basename).forEach((async (file: string) => {
+    const model = require(path.join(__dirname, './', file))
+    model(sequelize)
   }) as any)
 
-export const models = sequelize.models
+export const models: any = sequelize.models
+
+Object.keys(models).forEach(modelName => {
+  if (models[modelName].associate !== undefined) {
+    models[modelName].associate(models)
+  }
+})
 
 export default sequelize

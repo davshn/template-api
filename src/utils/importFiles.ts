@@ -11,7 +11,7 @@ export const importControllers = (basename: string, dirname: string): controller
   }
 
   async function joinFiles (file: string): Promise<void> {
-    const controller = await import(path.join(dirname, './', file))
+    const controller = require(path.join(dirname, './', file))
     controllers[file.slice(0, -3)] = controller.default
   }
 
