@@ -14,6 +14,7 @@ const loginController = async (req: Request): Promise<userToken> => {
 
   if (user === null) throw new Error('Usuario no encontrado ')
   if (!await bcrypt.compare(password, user.password)) throw new Error('Datos incorrectos ')
+  if (user.isBanned && !(user.isVerified)) throw new Error('Usuario en proceso de eliminacion ')
   if (!(user.isVerified)) throw new Error('Usuario no verificado ')
   if (user.isBanned) throw new Error('Usuario baneado ')
 

@@ -32,10 +32,10 @@ router.put('/edit', validateToken, validateUserEdit, verifyAuthentication, async
 router.delete('/delete', validateToken, verifyAuthentication, async (req: Request, res: Response) => {
   try {
     await userController.delete(req)
-    res.status(201).json('Usuario borrado con exito')
+    res.status(201).json('Usuario eliminado con exito')
   } catch (error) {
     Logger.error(error)
-    res.status(400).send('Error borrar el usuario')
+    res.status(400).send('Error eliminar el usuario')
   }
 })
 

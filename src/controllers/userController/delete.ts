@@ -7,8 +7,9 @@ const infoController = async (req: Request): Promise<void> => {
   const userInfo = req.user as decodedToken
 
   const user = await models.User.findOne({ where: { id: userInfo.id } }) as userModel
+  if (user.role === 'ADMIN' || user.role === 'ROOT') throw new Error('El usuario no puede ser eliminado ')
 
-  user.set({ isVerified: false })
+  user.set({ isVerified: false, isBanned: true })
   await user.save()
 }
 
