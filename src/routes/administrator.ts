@@ -30,4 +30,14 @@ router.get('/listUsers', validateToken, validatePagination, validateSort, valida
   }
 })
 
+router.get('/userDetail', validateToken, validateSearch, verifyAdminRole, async (req: Request, res: Response) => {
+  try {
+    const user = await administratorController.userDetail(req)
+    res.status(200).json(user)
+  } catch (error) {
+    Logger.error(error)
+    res.status(400).send('Ningun usuario coincide con la busqueda')
+  }
+})
+
 export default router

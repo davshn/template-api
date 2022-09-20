@@ -62,12 +62,6 @@
  *          required: false
  *          description: Order direction
  *        - in: query
- *          name: searchById
- *          schema:
- *          type: string
- *          required: false
- *          description: Search by id
- *        - in: query
  *          name: searchByName
  *          schema:
  *          type: string
@@ -79,24 +73,6 @@
  *          type: string
  *          required: false
  *          description: Search by lastname
- *        - in: query
- *          name: searchByDocumentNumber
- *          schema:
- *          type: string
- *          required: false
- *          description: Search by document number
- *        - in: query
- *          name: searchByEmail
- *          schema:
- *          type: string
- *          required: false
- *          description: Search by email
- *        - in: query
- *          name: searchByPhone
- *          schema:
- *          type: string
- *          required: false
- *          description: Search by phone
  *        - in: query
  *          name: searchByRole
  *          schema:
@@ -115,6 +91,56 @@
  *          type: string
  *          required: false
  *          description: Search by is verified
+ *      security:
+ *        - bearerAuth: []
+ *      responses:
+ *        '200':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '401':
+ *          $ref: "#/components/responses/401"
+ *        '403':
+ *          $ref: "#/components/responses/403"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ */
+
+/**
+ * Post track
+ * @openapi
+ * /administrator/userDetail:
+ *    get:
+ *      tags:
+ *        - Administrator
+ *      summary: "Detail of a user"
+ *      description: Detail of a user
+ *      parameters:
+ *        - in: query
+ *          name: searchById
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by id
+ *        - in: query
+ *          name: searchByDocumentNumber
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by document number
+ *        - in: query
+ *          name: searchByEmail
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by email
+ *        - in: query
+ *          name: searchByPhone
+ *          schema:
+ *          type: string
+ *          required: false
+ *          description: Search by phone
+
  *      security:
  *        - bearerAuth: []
  *      responses:
