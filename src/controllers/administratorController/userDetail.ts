@@ -19,8 +19,10 @@ const userDetailController = async (req: Request): Promise<userModel> => {
 
   const user = await models.User.findOne({
     where,
-    attributes: ['id', 'name', 'lastname', 'documentType', 'documentNumber', 'email', 'phone', 'profileAvatar', 'role', 'isBanned', 'isVerified']
-  }) as userModel
+    attributes: ['id', 'name', 'lastname', 'documentType', 'documentNumber', 'email', 'phone', 'profileAvatar', 'role', 'isBanned', 'isVerified'],
+    include: [{ model: models.Post, attributes: ['id', 'name'] }, { model: models.Comment, attributes: ['id', 'name'] }]
+  }
+  ) as userModel
 
   if (user === null) throw new Error('Ningun usuario coincide con la busqueda ')
   return user
