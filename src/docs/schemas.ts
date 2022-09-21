@@ -120,5 +120,20 @@ export const schemas = {
         type: 'boolean'
       }
     }
+  },
+  newSubcategory: {
+    type: 'object',
+    required: ['name', 'categoryId'],
+    properties: {
+      name: {
+        type: 'string'
+      },
+      detail: {
+        type: 'string'
+      },
+      categoryId: {
+        type: 'string'
+      }
+    }
   }
 }
