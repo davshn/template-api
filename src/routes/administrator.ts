@@ -13,7 +13,7 @@ const router = Router()
 router.patch('/banUser', validateToken, validateBanUser, verifyAdminRole, async (req: Request, res: Response) => {
   try {
     await administratorController.banUser(req)
-    res.status(201).json('Usuario baneado con exito')
+    res.status(201).send('Usuario baneado con exito')
   } catch (error) {
     Logger.error(error)
     res.status(400).send('Error al banear usuario')

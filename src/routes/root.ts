@@ -12,7 +12,7 @@ const router = Router()
 router.patch('/changeRole', validateToken, validateChangeRole, verifyRootRole, async (req: Request, res: Response) => {
   try {
     await rootController.changeRole(req)
-    res.status(201).json('Rol cambiado con exito')
+    res.status(201).send('Rol cambiado con exito')
   } catch (error) {
     Logger.error(error)
     res.status(400).send('Error al cambiar rol de usuario')
