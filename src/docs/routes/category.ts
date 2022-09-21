@@ -47,3 +47,23 @@
  *        '422':
  *          $ref: "#/components/responses/422"
  */
+
+/**
+ * Post track
+ * @openapi
+ * /category/list:
+ *    get:
+ *      tags:
+ *        - Category
+ *      summary: "List categories"
+ *      description: List categories
+ *      security:
+ *        - bearerAuth: []
+ *      responses:
+ *        '200':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ */
