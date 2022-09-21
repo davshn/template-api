@@ -106,16 +106,18 @@ export const schemas = {
       }
     }
   },
-  orderQuery: {
+  newCategory: {
     type: 'object',
-    required: [],
+    required: ['name', 'isPrivate'],
     properties: {
-      orderBy: {
+      name: {
         type: 'string'
       },
-      orderDirection: {
-        type: 'string',
-        enum: ['ASC', 'DESC']
+      detail: {
+        type: 'string'
+      },
+      isPrivate: {
+        type: 'boolean'
       }
     }
   }
