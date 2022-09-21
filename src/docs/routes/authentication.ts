@@ -63,6 +63,37 @@
 /**
  * Post track
  * @openapi
+ * /authentication/adminLogin:
+ *    post:
+ *      tags:
+ *        - Authentication
+ *      summary: "Admin login"
+ *      description: Login admin
+ *      parameters:
+ *       - in: header
+ *         name: Version
+ *         schema:
+ *         type: string
+ *         required: true
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/userLogin"
+ *      responses:
+ *        '200':
+ *          $ref: "#/components/responses/200"
+ *        '400':
+ *          $ref: "#/components/responses/400"
+ *        '422':
+ *          $ref: "#/components/responses/422"
+ *        '426':
+ *          $ref: "#/components/responses/426"
+ */
+
+/**
+ * Post track
+ * @openapi
  * /authentication/refresh:
  *    post:
  *      tags:

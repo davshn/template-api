@@ -30,6 +30,17 @@ router.post('/login', bruteLimiter, validateVersion, validateLogin, versionProte
   }
 })
 
+router.post('/adminLogin', bruteLimiter, validateVersion, validateLogin, versionProtection, async (req: Request, res: Response) => {
+  try {
+    const loggedUser = await authenticationController.adminLogin(req)
+    res.status(200).json(loggedUser)
+  } catch (error: any) {
+    const email = req.body.email as string
+    Logger.error(error.message as string + email)
+    res.status(400).json(error.message)
+  }
+})
+
 router.post('/refresh', validateVersion, validateRefresh, versionProtection, verifyRefresh, async (req: Request, res: Response) => {
   try {
     const loggedUser = await authenticationController.refresh(req)
