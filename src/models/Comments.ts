@@ -5,7 +5,6 @@ import { CommentsAttributes } from '../types/modelAttributes'
 module.exports = (sequelize: Sequelize) => {
   class Comment extends Model<CommentsAttributes> implements CommentsAttributes {
     id!: string
-    name!: string
     text!: string
 
     static associate (models: any): void {
@@ -20,13 +19,9 @@ module.exports = (sequelize: Sequelize) => {
       allowNull: false,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     text: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: false
     }
   }, {
     sequelize,

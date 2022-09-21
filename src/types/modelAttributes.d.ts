@@ -38,6 +38,5 @@ export interface PostAttributes {
 
 export interface CommentsAttributes {
   id: string
-  name: string
   text: string
 }
